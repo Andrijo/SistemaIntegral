@@ -103,16 +103,12 @@ header {
 }
 
 .btn:hover {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .btn-outline {
   border: 1px solid var(--white-color);
   color: var(--primary-color);
-}
-
-.btn-success {
-  background-color: var(--pantone);
 }
 
 /* Hero Section */
@@ -188,8 +184,8 @@ header {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
 }
 
 .feature-card {
