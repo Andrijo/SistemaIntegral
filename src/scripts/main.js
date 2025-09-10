@@ -30,3 +30,18 @@ if (logo) {
     })
   })
 }
+
+// Menú hamburguesa responsive
+const menuToggle = document.getElementById("menuToggle")
+const navLinks = document.getElementById("navLinks")
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active")
+  })
+  // Accesibilidad: permitir abrir con Enter
+  menuToggle.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      navLinks.classList.toggle("active")
+    }
+  })
+}
