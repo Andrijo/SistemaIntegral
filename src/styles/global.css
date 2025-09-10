@@ -184,7 +184,7 @@ header {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 20px;
 }
 
@@ -303,14 +303,22 @@ footer {
 .menu-toggle {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
+  z-index: 200;
 }
 
-.bar {
-  width: 25px;
-  height: 3px;
+/* Barras del icono hamburguesa */
+.menu-toggle .bar {
+  width: 28px;
+  height: 4px;
   background-color: var(--white-color);
-  margin: 3px 0;
+  margin: 4px 0;
+  border-radius: 2px;
+  display: block;
   transition: 0.4s;
 }
 
@@ -324,7 +332,7 @@ footer {
     left: -100%;
     top: 70px;
     flex-direction: column;
-    background-color: var(--dark-charcoal);
+    color: var(--white-color);
     width: 100%;
     text-align: center;
     transition: 0.3s;
@@ -465,3 +473,187 @@ footer {
   margin-right: 5px;
   font-size: 16px;
 }
+
+/* Modal de inicio de sesión */
+/* Estilos para el modal de inicio de sesión */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close:hover {
+  color: #000;
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1b396a;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #1b396a;
+}
+
+.radio-group {
+  margin-bottom: 25px;
+}
+
+.radio-group label {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.radio-options {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.radio-option input[type="radio"] {
+  width: auto;
+  margin: 0;
+}
+
+.radio-option label {
+  margin: 0;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.login-btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--cool-gray-pantone);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 15px;
+}
+
+.login-btn-submit:hover {
+  background-color: var(--pantone);
+}
+
+.create-account {
+  text-align: center;
+  color: var(--cool-gray-pantone);
+}
+
+.create-account a {
+  color: #1b396a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.create-account a:hover {
+  text-decoration: underline;
+}
+
+.create-account p {
+  color: var(--cool-gray-pantone);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .radio-options {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}
+
+/* Fin de modal de inicio de sesión */

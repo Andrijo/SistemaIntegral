@@ -4,182 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inicio | SGA</title>
-    <link rel="stylesheet" href="/styles/styles.css" />
-    <link rel="shortcut icon" href="assets/logos/itch.webp" type="image/x-icon" />
-    <style>
-      /* Estilos para el modal de inicio de sesión */
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        animation: fadeIn 0.3s ease-out;
-      }
-
-      .modal.show {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-
-      .modal-content {
-        background-color: white;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        width: 90%;
-        max-width: 400px;
-        position: relative;
-        animation: slideIn 0.3s ease-out;
-      }
-
-      @keyframes slideIn {
-        from { 
-          transform: translateY(-50px);
-          opacity: 0;
-        }
-        to { 
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-
-      .close {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        font-size: 24px;
-        font-weight: bold;
-        color: #aaa;
-        cursor: pointer;
-        transition: color 0.2s;
-      }
-
-      .close:hover {
-        color: #000;
-      }
-
-      .login-form h2 {
-        text-align: center;
-        margin-bottom: 25px;
-        color: #1b396a;
-        font-size: 24px;
-      }
-
-      .form-group {
-        margin-bottom: 20px;
-      }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        color: #333;
-        font-weight: 500;
-      }
-
-      .form-group input {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid #ddd;
-        border-radius: 6px;
-        font-size: 16px;
-        transition: border-color 0.3s;
-        box-sizing: border-box;
-      }
-
-      .form-group input:focus {
-        outline: none;
-        border-color: #1b396a;
-      }
-
-      .radio-group {
-        margin-bottom: 25px;
-      }
-
-      .radio-group label {
-        font-weight: 500;
-        color: #333;
-        margin-bottom: 10px;
-      }
-
-      .radio-options {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-      }
-
-      .radio-option {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .radio-option input[type="radio"] {
-        width: auto;
-        margin: 0;
-      }
-
-      .radio-option label {
-        margin: 0;
-        cursor: pointer;
-        font-weight: normal;
-      }
-
-      .login-btn-submit {
-        width: 100%;
-        padding: 12px;
-        background-color: #1b396a;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        margin-bottom: 15px;
-      }
-
-      .login-btn-submit:hover {
-        background-color: #27477c;
-      }
-
-      .create-account {
-        text-align: center;
-        color: #666;
-      }
-
-      .create-account a {
-        color: #1b396a;
-        text-decoration: none;
-        font-weight: 500;
-      }
-
-      .create-account a:hover {
-        text-decoration: underline;
-      }
-
-      /* Responsive */
-      @media (max-width: 480px) {
-        .modal-content {
-          width: 95%;
-          padding: 20px;
-        }
-        
-        .radio-options {
-          flex-direction: column;
-          gap: 10px;
-          align-items: flex-start;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="src/styles/global.css" />
+    <link rel="shortcut icon" href="/public/favicon.webp" type="image/x-icon" />
   </head>
   <body>
     <!-- Header -->
@@ -196,6 +22,15 @@
           </div>
           <ul class="nav-links">
             <li>
+              <a href="#features">Características</a>
+            </li>
+            <li>
+              <a href="#about">Acerca de</a>
+            </li>
+            <li>
+              <a href="#faq">FAQ</a>
+            </li>
+            <li>
               <a href="#" class="btn btn-outline login-btn" id="loginBtn">Iniciar sesión</a>
             </li>
           </ul>
@@ -211,13 +46,13 @@
           <h2>Iniciar Sesión</h2>
           
           <div class="form-group">
-            <label for="username">Nombre de usuario</label>
-            <input type="text" id="username" name="username" required>
+            <label for="username">Usuario</label>
+            <input type="text" id="username" name="username" placeholder="user@email.com" required>
           </div>
 
           <div class="form-group">
             <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" placeholder="password" required>
           </div>
 
           <div class="radio-group">
@@ -243,7 +78,7 @@
       </div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section --> 
     <section class="hero">
       <section class="container">
         <div class="hero-content fade-out">
@@ -256,7 +91,7 @@
             <a href="#" class="btn btn-success signup-btn btn-outline"
               >Comenzar a usar</a
             >
-            <a href="vercomofunciona.html" class="btn btn-outline">Ver cómo funciona</a>
+            <a href="/src/pages/vercomofunciona.html" class="btn btn-outline">Ver cómo funciona</a>
           </div>
         </div>
     </section>
@@ -285,7 +120,7 @@
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon"></div>
+            <div class="feature-icon">🧑‍🎓</div>
             <h3>Gestión de alumnos</h3>
             <ul>
               <li>Inscripción y reinscripción</li>
@@ -295,7 +130,7 @@
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon"></div>
+            <div class="feature-icon">🧑‍🏫</div>
             <h3>Gestión de docentes</h3>
             <ul>
               <li>Asignación de grupos y materias</li>
@@ -305,7 +140,7 @@
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon"></div>
+            <div class="feature-icon">🧾</div>
             <h3>Control administrativo y financiero</h3>
             <ul>
               <li>Asignación de grupos y materias</li>
@@ -315,7 +150,7 @@
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon"></div>
+            <div class="feature-icon">✉️</div>
             <h3>Comunicación escolar</h3>
             <ul>
               <li>Mensajería entre docentes y alumnos</li>
@@ -325,7 +160,7 @@
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon"></div>
+            <div class="feature-icon">📚</div>
             <h3>Biblioteca</h3>
             <ul>
               <li>Préstamo y control de materias</li>
@@ -334,7 +169,7 @@
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon"></div>
+            <div class="feature-icon">📊</div>
             <h3>Reportes y estadísticas</h3>
             <ul>
               <li>Indicadores de desempeño académico</li>
@@ -369,7 +204,7 @@
           <div class="footer-column">
             <h3>Recursos</h3>
             <ul class="footer-links">
-              <li><a href="#">Moodle</a></li>
+              <li><a href="https://moodle.chihuahua2.tecnm.mx/login/index.php" target="_blank">Moodle</a></li>
               <li><a href="#">Guías</a></li>
               <li><a href="#">Ejemplos</a></li>
             </ul>
@@ -378,18 +213,18 @@
           <div class="footer-column">
             <h3>Institución</h3>
             <ul class="footer-links">
-              <li><a href="#">Acerca de</a></li>
-              <li><a href="#">Ubicación</a></li>
-              <li><a href="#">Contacto</a></li>
+              <li><a href="/src/pages/about.html" target="_blank">Acerca de</a></li>
+              <li><a href="https://maps.app.goo.gl/5NaCkv4d4xsW2RKC6" target="_blank">Ubicación</a></li>
+              <li><a href="#" target="_blank">Contacto</a></li>
             </ul>
           </div>
 
           <div class="footer-column">
             <h3>Legal</h3>
             <ul class="footer-links">
-              <li><a href="#">Términos</a></li>
-              <li><a href="#">Privacidad</a></li>
-              <li><a href="#">Cookies</a></li>
+              <li><a href="#" target="_blank">Términos</a></li>
+              <li><a href="#" target="_blank">Privacidad</a></li>
+              <li><a href="#" target="_blank">Cookies</a></li>
             </ul>
           </div>
         </div>
@@ -400,97 +235,7 @@
         </div>
       </div>
     </footer>
-
-    <script>
-      // JavaScript para manejar el modal
-      const loginBtn = document.getElementById('loginBtn');
-      const loginModal = document.getElementById('loginModal');
-      const closeModal = document.getElementById('closeModal');
-      const loginForm = document.getElementById('loginForm');
-      const createAccountLink = document.getElementById('createAccountLink');
-
-      // Mostrar modal
-      loginBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        loginModal.classList.add('show');
-      });
-
-      // Cerrar modal con X
-      closeModal.addEventListener('click', function() {
-        loginModal.classList.remove('show');
-      });
-
-      // Cerrar modal haciendo clic fuera
-      loginModal.addEventListener('click', function(e) {
-        if (e.target === loginModal) {
-          loginModal.classList.remove('show');
-        }
-      });
-
-      // Cerrar modal con Escape
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && loginModal.classList.contains('show')) {
-          loginModal.classList.remove('show');
-        }
-      });
-
-      // Manejar envío del formulario
-      loginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const userType = document.querySelector('input[name="userType"]:checked').value;
-        
-        // Aquí puedes agregar la lógica de autenticación
-        console.log('Datos de login:', {
-          username: username,
-          password: password,
-          userType: userType
-        });
-        
-        // Ejemplo de redirección basada en el tipo de usuario
-        alert(`Iniciando sesión como ${userType}: ${username}`);
-        
-        // Aquí podrías redirigir a diferentes páginas según el tipo de usuario
-        // if (userType === 'alumno') {
-        //   window.location.href = 'dashboard-alumno.html';
-        // } else if (userType === 'tutor') {
-        //   window.location.href = 'dashboard-tutor.html';
-        // }
-        
-        // Cerrar modal después del login exitoso
-        loginModal.classList.remove('show');
-      });
-
-
-      // Cargar script existente si existe
-      if (typeof window !== 'undefined') {
-        const existingScript = document.createElement('script');
-        existingScript.src = '/scripts/script.js';
-        existingScript.onerror = function() {
-          // El archivo no existe, no hacer nada
-        };
-        document.head.appendChild(existingScript);
-      }
-
-      // ...links de boton crear cuenta...
-createAccountLink.addEventListener('click', function(e) {
-  e.preventDefault();
-  const userTypeRadio = document.querySelector('input[name="userType"]:checked');
-  if (!userTypeRadio) {
-    alert('Selecciona el tipo de usuario antes de crear una cuenta.');
-    return;
-  }
-  if (userTypeRadio.value === 'alumno') {
-    window.location.href = 'registroDeAlumno.html';
-  } else if (userTypeRadio.value === 'tutor') {
-    window.location.href = 'registroDeTutor.html';
-  }
-});
-// ...links de boton crear cuenta...
-
-
-    </script>
+    <script src="src/scripts/main.js"></script>
+    <script src="src/scripts/modal.js"></script>
   </body>
 </html>
