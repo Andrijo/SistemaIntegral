@@ -11,7 +11,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       if (targetElement) {
         navLinks.classList.remove("active")
         window.scrollTo({
-          top: targetElement.offsetTop - 40,
+          top: targetElement.offsetTop - 20,
           behavior: "smooth",
         })
       }
@@ -45,3 +45,16 @@ if (menuToggle && navLinks) {
     }
   })
 }
+
+// FAQ desplegable
+document.querySelectorAll(".faq-question").forEach((question) => {
+  question.addEventListener("click", function () {
+    const answer = this.nextElementSibling
+    if (answer && answer.classList.contains("faq-answer")) {
+      answer.style.display =
+        answer.style.display === "none" || answer.style.display === ""
+          ? "block"
+          : "none"
+    }
+  })
+})
