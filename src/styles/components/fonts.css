@@ -1,0 +1,14 @@
+/* Fuentes a utilizar*/
+@font-face {
+  font-family: "Montserrat";
+  src: url(/assets/fonts/Montserrat/static/Montserrat-Bold.ttf)
+    format("truetype");
+  font-weight: bold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montse";
+  src: url(/assets/fonts/Montserrat/static/Montserrat-Regular.ttf);
+  font-display: swap;
+}

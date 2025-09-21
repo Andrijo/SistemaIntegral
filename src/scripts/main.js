@@ -1,20 +1,29 @@
 // Desplazamiento suave para enlaces
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
-    if (this.getAttribute("href") !== "#") {
-      e.preventDefault()
+    e.preventDefault()
 
-      const targetId = this.getAttribute("href")
-      if (targetId === "#") return
+    const targetId = this.getAttribute("href")
+    if (targetId === "#") return
 
-      const targetElement = document.querySelector(targetId)
-      if (targetElement) {
-        navLinks.classList.remove("active")
-        window.scrollTo({
-          top: targetElement.offsetTop - 20,
-          behavior: "smooth",
-        })
-      }
+    const targetElement = document.querySelector(targetId)
+    const navLinks = document.querySelectorAll(".nav-links a") // Definir navLinks aquí
+
+    if (targetElement) {
+      // Remover clase active de todos los enlaces
+      navLinks.forEach((link) => link.classList.remove("active"))
+
+      // Agregar clase active al enlace clickeado
+      this.classList.add("active")
+
+      // Actualizar la URL
+      history.replaceState(null, null, targetId)
+
+      // Scroll suave al elemento
+      window.scrollTo({
+        top: targetElement.offsetTop - 40, // Ajusta según la altura de tu navbar
+        behavior: "smooth",
+      })
     }
   })
 })
@@ -24,25 +33,11 @@ const logo = document.querySelector(".logo a")
 if (logo) {
   logo.addEventListener("click", (e) => {
     e.preventDefault()
+    history.replaceState(null, null, logo)
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
-  })
-}
-
-// Menú hamburguesa responsive
-const menuToggle = document.getElementById("menuToggle")
-const navLinks = document.getElementById("navLinks")
-if (menuToggle && navLinks) {
-  menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active")
-  })
-  // Accesibilidad: permitir abrir con Enter
-  menuToggle.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      navLinks.classList.toggle("active")
-    }
   })
 }
 

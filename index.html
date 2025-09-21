@@ -8,19 +8,17 @@
     <link rel="shortcut icon" href="/public/favicon.webp" type="image/x-icon" />
   </head>
   <body>
-    <!-- Header -->
+    <div class="main">
+
+    <!-- Navbar -->
     <header>
       <div class="container">
         <nav class="navbar nav-links">
-          <div class="logo">
-            <a href="#">Sistema de Gestión Académica </a>
-          </div>
-          <div class="menu-toggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-          </div>
+          
           <ul class="nav-links">
+            <li class="logo">
+            <a href="#">SGA</a>
+          </li>
             <li>
               <a href="#features">Características</a>
             </li>
@@ -30,10 +28,10 @@
             <li>
               <a href="#faq">FAQ</a>
             </li>
-            <li>
-              <a href="#" class="btn btn-outline login-btn" id="loginBtn">Iniciar sesión</a>
-            </li>
           </ul>
+          <div class="login">
+              <a href="#" class="login-btn" id="loginBtn">Iniciar sesión</a>
+          </div>
         </nav>
       </div>
     </header>
@@ -78,6 +76,9 @@
       </div>
     </div>
 
+
+    
+
     <!-- Hero Section --> 
     <section class="hero">
       <section class="container">
@@ -85,13 +86,13 @@
           <h1>Plataforma para la administración académica</h1>
           <p>
             Transforma la gestión de tu institución educativa con nuestra
-            plataforma integral de administración académica
+            plataforma integral de administración académica, da seguimiento a proyectos, gestiona tus equipos, tareas, entregas y evaluaciones
           </p>
           <div class="cta-buttons">
-            <a href="#" class="btn btn-success signup-btn btn-outline"
+            <a href="#" class="btn-how-to-use" id="btn-how-to-use"
               >Comenzar a usar</a
             >
-            <a href="/src/pages/vercomofunciona.html" class="btn btn-outline">Ver cómo funciona</a>
+            <a href="/src/pages/howItWorks.html" class="btn btn-outline">Ver cómo funciona</a>
           </div>
         </div>
     </section>
@@ -194,7 +195,7 @@
         <div class="faq-list">
           <div class="faq-item">
             <h3 class="faq-question">¿Cómo puedo crear una cuenta?</h3>
-            <p class="faq-answer" style="display:none;">Para crear una cuenta, haz clic en el botón "Iniciar sesión" en la esquina superior derecha y luego selecciona "Crear cuenta". Completa el formulario con tus datos y sigue las instrucciones para verificar tu correo electrónico.</p>
+            <p class="faq-answer" style="display:none;">Para crear una cuenta, haz clic en el botón "Iniciar sesión" en la esquina superior derecha, selecciona si eres alumno o docente y luego oprime "Crear cuenta". Completa el formulario con tus datos y sigue las instrucciones para crear tu cuenta.</p>
           </div>
           <div class="faq-item">
             <h3 class="faq-question">¿Qué hago si olvidé mi contraseña?</h3>
@@ -215,7 +216,7 @@
         </div>
       </div>
     </section>
-
+</div>
     <!-- Footer -->
     <footer>
       <div class="container">
