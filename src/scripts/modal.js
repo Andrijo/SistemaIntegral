@@ -1,20 +1,28 @@
 // JavaScript para manejar el modal
 const loginBtn = document.getElementById("loginBtn")
+const bttnHowToUse = document.getElementById("btn-how-to-use")
 const loginModal = document.getElementById("loginModal")
 const closeModal = document.getElementById("closeModal")
 const loginForm = document.getElementById("loginForm")
 const createAccountLink = document.getElementById("createAccountLink")
 
-// Mostrar modal
-loginBtn.addEventListener("click", function (e) {
+// Modal del login
+// Mostrar modal con función flecha
+const handleLoginClick = (e) => {
   e.preventDefault()
   loginModal.classList.add("show")
-})
+}
+
+loginBtn.addEventListener("click", handleLoginClick)
+bttnHowToUse.addEventListener("click", handleLoginClick)
 
 // Cerrar modal con X
-closeModal.addEventListener("click", function () {
+const closeModalWithX = (e) => {
+  e.preventDefault()
   loginModal.classList.remove("show")
-})
+}
+
+closeModal.addEventListener("click", closeModalWithX)
 
 // Cerrar modal haciendo clic fuera
 loginModal.addEventListener("click", function (e) {
@@ -39,6 +47,8 @@ loginForm.addEventListener("submit", function (e) {
   const userType = document.querySelector(
     'input[name="userType"]:checked'
   ).value
+
+  // Fin del modal de login
 
   // Aquí puedes agregar la lógica de autenticación
   console.log("Datos de login:", {
@@ -71,7 +81,7 @@ if (typeof window !== "undefined") {
   document.head.appendChild(existingScript)
 }
 
-// ...links de boton crear cuenta...
+// ...Links de botón crear cuenta ...
 createAccountLink.addEventListener("click", function (e) {
   e.preventDefault()
   const userTypeRadio = document.querySelector('input[name="userType"]:checked')
@@ -80,9 +90,9 @@ createAccountLink.addEventListener("click", function (e) {
     return
   }
   if (userTypeRadio.value === "alumno") {
-    window.location.href = "src/pages/registroDeAlumno.html"
+    window.location.href = "src/pages/studentSignUp.html"
   } else if (userTypeRadio.value === "tutor") {
-    window.location.href = "src/pages/registroDeTutor.html"
+    window.location.href = "src/pages/teacherSignUp.html"
   }
 })
 // ...links de boton crear cuenta...

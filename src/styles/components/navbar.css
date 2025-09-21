@@ -1,0 +1,90 @@
+@import url(/src/styles/components/colors.css);
+@import url(/src/styles/components/fonts.css);
+
+/* Header */
+header {
+  background-color: var(--white-color);
+  box-shadow: 0 2px 10px rgba(120, 95, 95, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  padding: 22px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  margin-left: auto 10px;
+  padding: 10px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.4s;
+  color: var(--pantone);
+  opacity: 0.8;
+  padding: 10px;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0px;
+  left: 0;
+  background: var(--cool-gray-pantone);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.btn-how-to-use {
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  color: var(--white-color);
+  background-color: var(--pantone);
+}
+
+.btn-how-to-use:hover {
+  opacity: 0.9;
+}
+
+.login {
+  margin-left: 20px;
+}
+
+.login-btn {
+  border-radius: 4px;
+  border: 1px solid var(--pantone);
+}
+
+.login-btn:hover {
+  color: var(--white-color);
+  background-color: var(--pantone);
+}
