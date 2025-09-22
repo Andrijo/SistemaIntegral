@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
   database: "sga",
 })
 
-// Control de errores
+// Control de errores en la conexión
 connection.connect((error) => {
   if (error) {
     console.error("Error al conectar a la base de datos: " + error.stack)
