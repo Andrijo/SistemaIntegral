@@ -1,18 +1,5 @@
-@import url("src\styles\global.css");
-/* Fuentes */
-@font-face {
-  font-family: "Montserrat";
-  src: url(/assets/fonts/Montserrat/static/Montserrat-Bold.ttf)
-    format("truetype");
-  font-weight: bold;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Montse";
-  src: url(/assets/fonts/Montserrat/static/Montserrat-Regular.ttf);
-  font-display: swap;
-}
+@import url(/src/styles/components/colors.css);
+@import url(/src/styles/components/fonts.css);
 
 * {
   margin: 0;
@@ -34,24 +21,22 @@ body {
   position: fixed;
   top: 20px;
   left: 20px;
-  background: var(--pantone);
-  color: var(--white-color);
+  background: var(--white-color);
+  color: var(--pantone);
   padding: 10px 18px;
   border-radius: 6px;
-  border: 1px solid var(--white-color);
   text-decoration: none;
   font-weight: bold;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   z-index: 1000;
+  opacity: 0.8;
   transition: all 0.3s;
-  opacity: 0.7;
 }
 
 .back-btn:hover {
-  background: var(--pantone);
+  opacity: 1;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  opacity: 1;
 }
 
 .container {
@@ -184,7 +169,6 @@ body {
   border: none;
   border-radius: 8px;
   font-size: 16px;
-  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
   margin-bottom: 15px;

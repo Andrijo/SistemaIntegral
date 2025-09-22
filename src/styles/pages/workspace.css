@@ -1,0 +1,279 @@
+@import url(/src/styles/components/colors.css);
+@import url(/src/styles/components/fonts.css);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Montse;
+  background: var(--white-color);
+  color: var(--pantone);
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 280px;
+  background: var(--pantone);
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.workspace-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--cool-gray-pantone);
+}
+
+.workspace-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: auto;
+  background: var(--cool-gray-pantone);
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 2px;
+  color: var(--white-color);
+}
+
+.workspace-title {
+  color: var(--white-color);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.nav-section {
+  margin-bottom: 30px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  color: var(--white-color);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s;
+  opacity: 0.8;
+}
+
+.nav-item:hover {
+  opacity: 1;
+  padding-left: 10px;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+}
+
+.section-title {
+  color: var(--white-color);
+  font: Montserrat;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  margin-top: 20px;
+}
+
+.add-page {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--cool-gray-pantone);
+  font-size: 14px;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.add-page:hover {
+  color: #cccccc;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.greeting {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.greeting-text {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.search-container {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 600px;
+  padding: 15px 20px;
+  border: 1px solid var(--cool-gray-pantone);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: var(--pantone);
+}
+
+.tabs {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--cool-gray-pantone);
+}
+
+.tab {
+  padding: 15px 0;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  opacity: 0.8;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  opacity: 1;
+  border-bottom-color: var(--cool-gray-pantone);
+}
+
+.tab:hover {
+  opacity: 1;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: #888888;
+  font-size: 14px;
+}
+
+.clock-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--pantone);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #404040;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: #4a9eff;
+  box-shadow: 0 10px 30px rgba(74, 158, 255, 0.1);
+}
+
+.card-image {
+  width: 100%;
+  height: 140px;
+  background-color: var(--white-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--white-color);
+}
+
+.card-subtitle {
+  color: var(--white-color);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.card-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 24px;
+  height: 24px;
+  background: var(--pantone);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}

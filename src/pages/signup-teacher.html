@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Tutor | SGA</title>
+    <link rel="shortcut icon" href="/public/favicon.webp" type="image/x-icon" />
+    <link rel="stylesheet" href="/src/styles/pages/signup-tutor.css" />
+  </head>
+  <body>
+    <a href="/index.html" class="back-btn">← Volver al inicio</a>
+
+    <div class="container">
+      <div class="header">
+        <div class="user-type-badge">👨‍🏫 Tutor</div>
+        <h1>Crear Cuenta</h1>
+        <p>Completa los siguientes datos para registrarte</p>
+      </div>
+
+      <div id="successMessage" class="success-message">
+        ¡Cuenta creada exitosamente! Tu matrícula de tutor ha sido generada.
+      </div>
+
+      <div id="errorMessage" class="error-message">
+        Error al crear la cuenta. Por favor, verifica los datos.
+      </div>
+
+      <form id="registroForm">
+        <div class="form-group">
+          <label for="nombre">Nombre*</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            required
+            minlength="3"
+            placeholder="Ingrese su nombre" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo electrónico *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="user@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="especialidad">Especialidad *</label>
+          <select id="especialidad" name="especialidad" required>
+            <option value="">Selecciona tu especialidad</option>
+            <option value="matematicas">Matemáticas</option>
+            <option value="espanol">Español</option>
+            <option value="ciencias">Ciencias Naturales</option>
+            <option value="historia">Historia</option>
+            <option value="geografia">Geografía</option>
+            <option value="ingles">Inglés</option>
+            <option value="educacion_fisica">Educación Física</option>
+            <option value="artes">Artes</option>
+            <option value="computacion">Computación</option>
+            <option value="filosofia">Filosofía</option>
+            <option value="quimica">Química</option>
+            <option value="fisica">Física</option>
+            <option value="biologia">Biología</option>
+            <option value="otra">Otra especialidad</option>
+          </select>
+          <div class="specialization-info">
+            💡 Tu especialidad ayudará a asignarte las materias adecuadas
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña *</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            minlength="6" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Confirma tu contraseña *</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            minlength="6" />
+        </div>
+
+        <button type="submit" class="submit-btn">Crear Cuenta</button>
+      </form>
+
+      <div class="login-link">
+        <p>¿Ya tienes cuenta? <a href="/index.html">Iniciar sesión</a></p>
+        <p><a href="signup-teacher.html">¿Eres alumno? Regístrate aquí</a></p>
+      </div>
+    </div>
+    <script src="/src/scripts/signup-teacher.js"></script>
+  </body>
+</html>

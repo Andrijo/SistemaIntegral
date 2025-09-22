@@ -90,9 +90,9 @@ createAccountLink.addEventListener("click", function (e) {
     return
   }
   if (userTypeRadio.value === "alumno") {
-    window.location.href = "src/pages/studentSignUp.html"
+    window.location.href = "src/pages/signup-student.html"
   } else if (userTypeRadio.value === "tutor") {
-    window.location.href = "src/pages/teacherSignUp.html"
+    window.location.href = "src/pages/signup-teacher.html"
   }
 })
 // ...links de boton crear cuenta...
