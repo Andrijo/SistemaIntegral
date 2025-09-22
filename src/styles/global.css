@@ -473,7 +473,7 @@ footer {
 .login-form h2 {
   text-align: center;
   margin-bottom: 25px;
-  color: #1b396a;
+  color: var(--pantone);
   font-size: 24px;
 }
 
@@ -484,11 +484,12 @@ footer {
 .form-group label {
   display: block;
   margin-bottom: 5px;
-  color: #333;
+  color: var(--pantone);
   font-weight: 500;
 }
 
 .form-group input {
+  color: var(--pantone);
   width: 100%;
   padding: 12px;
   border: 2px solid #ddd;
@@ -500,7 +501,7 @@ footer {
 
 .form-group input:focus {
   outline: none;
-  border-color: #1b396a;
+  border-color: var(--cool-gray-pantone);
 }
 
 .radio-group {
@@ -509,7 +510,7 @@ footer {
 
 .radio-group label {
   font-weight: 500;
-  color: #333;
+  color: var(--pantone);
   margin-bottom: 10px;
 }
 
