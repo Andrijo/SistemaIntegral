@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Alumno | SGA</title>
+    <link rel="shortcut icon" href="/public/favicon.webp" type="image/x-icon" />
+    <link rel="stylesheet" href="/src/styles/pages/signup-student.css" />
+  </head>
+  <body>
+    <a href="/index.html" class="back-btn">← Volver al inicio</a>
+
+    <div class="container">
+      <div class="header">
+        <div class="user-type-badge">👨‍🎓 Alumno</div>
+        <h1>Crear Cuenta</h1>
+        <p>Completa los siguientes datos para registrarte</p>
+      </div>
+
+      <div id="successMessage" class="success-message">
+        ¡Cuenta creada exitosamente! Tu matrícula ha sido generada.
+      </div>
+
+      <div id="errorMessage" class="error-message">
+        Error al crear la cuenta. Por favor, verifica los datos.
+      </div>
+
+      <form id="registroForm">
+        <div class="form-group">
+          <label for="nombre">Nombre completo *</label>
+          <input type="text" id="nombre" name="nombre" required minlength="3" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo electrónico *</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña *</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            minlength="6" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Confirma tu contraseña *</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            minlength="6" />
+        </div>
+        <button type="submit" class="submit-btn">Crear Cuenta</button>
+      </form>
+
+      <div class="login-link">
+        <p>¿Ya tienes cuenta? <a href="/index.html">Iniciar sesión</a></p>
+        <p><a href="teacherSignUp.html">¿Eres tutor? Regístrate aquí</a></p>
+      </div>
+    </div>
+    <script src="/src/scripts/signup-student.js"></script>
+  </body>
+</html>
