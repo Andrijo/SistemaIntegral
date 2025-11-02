@@ -14,3 +14,12 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.privacy-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--pantone);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

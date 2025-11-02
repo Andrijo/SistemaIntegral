@@ -1,98 +1,200 @@
-// JavaScript para manejar el modal
-const loginBtn = document.getElementById("loginBtn")
-const bttnHowToUse = document.getElementById("btn-how-to-use")
-const loginModal = document.getElementById("loginModal")
-const closeModal = document.getElementById("closeModal")
-const loginForm = document.getElementById("loginForm")
-const createAccountLink = document.getElementById("createAccountLink")
+// Gestión de modales con autenticación Supabase
 
-// Modal del login
-// Mostrar modal con función flecha
-const handleLoginClick = (e) => {
-  e.preventDefault()
-  loginModal.classList.add("show")
-}
+document.addEventListener("DOMContentLoaded", function () {
+  // Elementos del DOM
+  const loginModal = document.getElementById("loginModal")
+  const registerModal = document.getElementById("registerModal")
+  const loginBtn = document.getElementById("loginBtn")
+  const closeModal = document.getElementById("closeModal")
+  const closeRegisterModal = document.getElementById("closeRegisterModal")
+  const createAccountLink = document.getElementById("createAccountLink")
+  const backToLogin = document.getElementById("backToLogin")
+  const loginForm = document.getElementById("loginForm")
+  const registerBtn = document.getElementById("registerBtn")
+  const btnHowToUse = document.getElementById("btn-how-to-use")
 
-loginBtn.addEventListener("click", handleLoginClick)
-bttnHowToUse.addEventListener("click", handleLoginClick)
+  // Función para mostrar alertas
+  function showAlert(message, type = "error") {
+    const alertDiv = document.getElementById("registerAlert")
+    if (!alertDiv) return
 
-// Cerrar modal con X
-const closeModalWithX = (e) => {
-  e.preventDefault()
-  loginModal.classList.remove("show")
-}
+    alertDiv.textContent = message
+    alertDiv.className = `alert ${type}`
+    alertDiv.style.display = "block"
 
-closeModal.addEventListener("click", closeModalWithX)
-
-// Cerrar modal haciendo clic fuera
-loginModal.addEventListener("click", function (e) {
-  if (e.target === loginModal) {
-    loginModal.classList.remove("show")
+    setTimeout(() => {
+      alertDiv.style.display = "none"
+    }, 5000)
   }
-})
 
-// Cerrar modal con Escape
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape" && loginModal.classList.contains("show")) {
-    loginModal.classList.remove("show")
+  // Abrir modal de login
+  if (loginBtn) {
+    loginBtn.addEventListener("click", function (e) {
+      e.preventDefault()
+      loginModal.style.display = "flex"
+      loginModal.style.alignItems = "center"
+      loginModal.style.justifyContent = "center"
+    })
   }
-})
 
-// Manejar envío del formulario
-loginForm.addEventListener("submit", function (e) {
-  e.preventDefault()
+  if (btnHowToUse) {
+    btnHowToUse.addEventListener("click", function (e) {
+      e.preventDefault()
+      loginModal.style.display = "flex"
+    })
+  }
 
-  const username = document.getElementById("username").value
-  const password = document.getElementById("password").value
-  const userType = document.querySelector(
-    'input[name="userType"]:checked'
-  ).value
+  // Cerrar modal de login
+  if (closeModal) {
+    closeModal.addEventListener("click", function () {
+      loginModal.style.display = "none"
+    })
+  }
 
-  // Fin del modal de login
+  // Cerrar modal de registro
+  if (closeRegisterModal) {
+    closeRegisterModal.addEventListener("click", function () {
+      registerModal.style.display = "none"
+    })
+  }
 
-  // Aquí puedes agregar la lógica de autenticación
-  console.log("Datos de login:", {
-    username: username,
-    password: password,
-    userType: userType,
+  // Cambiar a modal de registro
+  if (createAccountLink) {
+    createAccountLink.addEventListener("click", function (e) {
+      e.preventDefault()
+      loginModal.style.display = "none"
+      registerModal.style.display = "flex"
+      registerModal.style.alignItems = "center"
+      registerModal.style.justifyContent = "center"
+    })
+  }
+
+  // Volver a modal de login
+  if (backToLogin) {
+    backToLogin.addEventListener("click", function (e) {
+      e.preventDefault()
+      registerModal.style.display = "none"
+      loginModal.style.display = "flex"
+      loginModal.style.alignItems = "center"
+      loginModal.style.justifyContent = "center"
+    })
+  }
+
+  // Cerrar modales al hacer clic fuera
+  window.addEventListener("click", function (event) {
+    if (event.target === loginModal) {
+      loginModal.style.display = "none"
+    }
+    if (event.target === registerModal) {
+      registerModal.style.display = "none"
+    }
   })
 
-  // Ejemplo de redirección basada en el tipo de usuario
-  alert(`Iniciando sesión como ${userType}: ${username}`)
+  // Manejar envío del formulario de login
+  if (loginForm) {
+    loginForm.addEventListener("submit", async function (e) {
+      e.preventDefault()
 
-  // Aquí podrías redirigir a diferentes páginas según el tipo de usuario
-  // if (userType === 'alumno') {
-  //   window.location.href = 'dashboard-alumno.html';
-  // } else if (userType === 'tutor') {
-  //   window.location.href = 'dashboard-tutor.html';
-  // }
+      const email = document.getElementById("username").value
+      const password = document.getElementById("password").value
 
-  // Cerrar modal después del login exitoso
-  loginModal.classList.remove("show")
+      // Mostrar indicador de carga
+      const submitBtn = loginForm.querySelector(".login-btn-submit")
+      const originalText = submitBtn.textContent
+      submitBtn.textContent = "Ingresando..."
+      submitBtn.disabled = true
+
+      // Intentar iniciar sesión
+      const result = await loginUser(email, password)
+
+      if (result.success) {
+        // Éxito - el listener onAuthStateChange manejará la redirección
+        console.log("Login exitoso")
+      } else {
+        // Mostrar error
+        alert(`Error al iniciar sesión: ${result.error}`)
+        submitBtn.textContent = originalText
+        submitBtn.disabled = false
+      }
+    })
+  }
+
+  // Manejar registro de usuario
+  if (registerBtn) {
+    registerBtn.addEventListener("click", async function (e) {
+      e.preventDefault()
+
+      const email = document.getElementById("registerEmail").value
+      const password = document.getElementById("registerPassword").value
+      const passwordConfirm = document.getElementById(
+        "registerPasswordConfirm"
+      ).value
+
+      // Validaciones
+      if (!email || !password || !passwordConfirm) {
+        showAlert("Por favor completa todos los campos", "error")
+        return
+      }
+
+      if (password !== passwordConfirm) {
+        showAlert("Las contraseñas no coinciden", "error")
+        return
+      }
+
+      if (password.length < 6) {
+        showAlert("La contraseña debe tener al menos 6 caracteres", "error")
+        return
+      }
+
+      // Mostrar indicador de carga
+      const originalText = registerBtn.textContent
+      registerBtn.textContent = "Registrando..."
+      registerBtn.disabled = true
+
+      // Intentar registrar
+      const result = await registerUser(email, password)
+
+      if (result.success) {
+        showAlert(
+          "¡Registro exitoso! Revisa tu correo para confirmar tu cuenta",
+          "success"
+        )
+
+        // Limpiar formulario
+        document.getElementById("registerEmail").value = ""
+        document.getElementById("registerPassword").value = ""
+        document.getElementById("registerPasswordConfirm").value = ""
+
+        // Volver al login después de 3 segundos
+        setTimeout(() => {
+          registerModal.style.display = "none"
+          loginModal.style.display = "flex"
+        }, 3000)
+      } else {
+        showAlert(`Error al registrar: ${result.error}`, "error")
+      }
+
+      registerBtn.textContent = originalText
+      registerBtn.disabled = false
+    })
+  }
+
+  // Gestión de FAQ (acordeón)
+  const faqQuestions = document.querySelectorAll(".faq-question")
+  faqQuestions.forEach((question) => {
+    question.addEventListener("click", function () {
+      const answer = this.nextElementSibling
+      const isOpen = answer.style.display === "block"
+
+      // Cerrar todas las respuestas
+      document.querySelectorAll(".faq-answer").forEach((ans) => {
+        ans.style.display = "none"
+      })
+
+      // Abrir/cerrar la respuesta clickeada
+      if (!isOpen) {
+        answer.style.display = "block"
+      }
+    })
+  })
 })
-
-// Cargar script existente si existe
-if (typeof window !== "undefined") {
-  const existingScript = document.createElement("script")
-  existingScript.src = "/scripts/script.js"
-  existingScript.onerror = function () {
-    // El archivo no existe, no hacer nada
-  }
-  document.head.appendChild(existingScript)
-}
-
-// ...Links de botón crear cuenta ...
-createAccountLink.addEventListener("click", function (e) {
-  e.preventDefault()
-  const userTypeRadio = document.querySelector('input[name="userType"]:checked')
-  if (!userTypeRadio) {
-    alert("Selecciona el tipo de usuario antes de crear una cuenta.")
-    return
-  }
-  if (userTypeRadio.value === "alumno") {
-    window.location.href = "src/pages/signup-student.html"
-  } else if (userTypeRadio.value === "tutor") {
-    window.location.href = "src/pages/signup-teacher.html"
-  }
-})
-// ...links de boton crear cuenta...

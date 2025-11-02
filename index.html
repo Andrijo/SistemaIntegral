@@ -9,222 +9,299 @@
   </head>
   <body>
     <div class="main">
-
-    <!-- Navbar -->
-    <header>
-      <div class="container">
-        <nav class="navbar nav-links">
-          
-          <ul class="nav-links">
-            <li class="logo">
-            <a href="#">SGA</a>
-          </li>
-          <li>
-            <a href="/src/pages/workspace.html">Dashboard</a>
-          </li>
-            <li>
-              <a href="#features">Características</a>
-            </li>
-            <li>
-              <a href="/src/pages/how-it-works.html">Cómo funciona</a>
-            </li>
-            <!--
-            <li>
-              <a href="/src/pages/about.html">Acerca de</a>
-            </li>
-            -->
-            <li>
-              <a href="#faq">FAQ</a>
-            </li>
-          </ul>
-          <div class="login">
+      <!-- Navbar -->
+      <header>
+        <div class="container">
+          <nav class="navbar nav-links">
+            <ul class="nav-links">
+              <li class="logo">
+                <a href="#" aria-disabled="true">SGA</a>
+              </li>
+              <li>
+                <a href="#features">Características</a>
+              </li>
+              <li>
+                <a href="/src/pages/how-it-works.html">Cómo funciona</a>
+              </li>
+              <li>
+                <a href="#faq">FAQ</a>
+              </li>
+              <li>
+                <a href="/src/pages/about.html">Acerca de</a>
+              </li>
+              <li>
+                <a href="/src/pages/privacy-notice.html">Privacidad</a>
+              </li>
+              <!--
+              <li>
+                <a href="/src/pages/test.html">Test</a>
+              </li>
+               -->
+            </ul>
+            <div class="login">
               <a href="#" class="login-btn" id="loginBtn">Iniciar sesión</a>
-          </div>
-        </nav>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Modal de Inicio de Sesión -->
+      <div id="loginModal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="closeModal">&times;</span>
+          <form class="login-form" id="loginForm">
+            <h2>Iniciar Sesión</h2>
+
+            <div class="form-group">
+              <label for="username">Usuario:</label>
+              <input
+                type="email"
+                id="username"
+                name="username"
+                placeholder="user@email.com"
+                required />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Contraseña:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="password"
+                required />
+            </div>
+
+            <button type="submit" class="login-btn-submit">Ingresar</button>
+
+            <div class="create-account" style="margin-top: 2rem">
+              <p>
+                ¿No tienes cuenta?
+                <a href="#" id="createAccountLink">Crear cuenta</a>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
-    </header>
 
-    <!-- Modal de Inicio de Sesión -->
-    <div id="loginModal" class="modal">
-      <div class="modal-content">
-        <span class="close" id="closeModal">&times;</span>
-        <form class="login-form" id="loginForm">
-          <h2>Iniciar Sesión</h2>
-          
-          <div class="form-group">
-            <label for="username">Usuario</label>
-            <input type="text" id="username" name="username" placeholder="user@email.com" required>
-          </div>
+      <!-- Modal de Registro -->
+      <div id="registerModal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="closeRegisterModal">&times;</span>
+          <form class="login-form" id="registerForm">
+            <h2>Crear Cuenta</h2>
 
-          <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" placeholder="password" required>
-          </div>
+            <div id="registerAlert" class="alert"></div>
 
-          <div class="radio-group">
-            <label>Tipo de usuario:</label>
-            <div class="radio-options">
-              <div class="radio-option">
-                <input type="radio" id="alumno" name="userType" value="alumno" required>
-                <label for="alumno">Alumno</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="tutor" name="userType" value="tutor" required>
-                <label for="tutor">Tutor</label>
-              </div>
+            <div class="form-group">
+              <label for="registerEmail">Email:</label>
+              <input
+                type="email"
+                id="registerEmail"
+                placeholder="tu@email.com"
+                required />
+            </div>
+
+            <div class="form-group">
+              <label for="registerPassword">Contraseña:</label>
+              <input
+                type="password"
+                id="registerPassword"
+                placeholder="Mínimo 6 caracteres"
+                required />
+            </div>
+
+            <div class="form-group">
+              <label for="registerPasswordConfirm">Confirmar Contraseña:</label>
+              <input
+                type="password"
+                id="registerPasswordConfirm"
+                placeholder="Repite tu contraseña"
+                required />
+            </div>
+
+            <button type="button" class="login-btn-submit" id="registerBtn">
+              Registrarse
+            </button>
+
+            <div class="create-account">
+              <p>
+                ¿Ya tienes cuenta?
+                <a href="#" id="backToLogin">Iniciar sesión</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Hero Section -->
+      <section class="hero">
+        <section class="container">
+          <div class="hero-content fade-out">
+            <h1>Plataforma para la administración académica</h1>
+            <p>
+              Transforma la gestión de tu institución educativa con nuestra
+              plataforma integral de administración académica, da seguimiento a
+              proyectos, gestiona tus equipos, tareas, entregas y evaluaciones
+            </p>
+            <div class="cta-buttons">
+              <a href="#" class="btn-how-to-use" id="btn-how-to-use"
+                >Comenzar a usar</a
+              >
+              <a href="/src/pages/how-it-works.html" class="btn btn-outline"
+                >Ver cómo funciona</a
+              >
             </div>
           </div>
+        </section>
+      </section>
 
-          <button type="submit" class="login-btn-submit">Ingresar</button>
-          
-          <div class="create-account">
-            <p>¿No tienes cuenta? <a href="#" id="createAccountLink">Crear cuenta</a></p>
+      <!-- Features Section -->
+      <section class="features fade-in" id="features">
+        <div class="container">
+          <div class="section-title">
+            <h2>Características</h2>
+            <p>
+              Descubre todas las herramientas que el sistema tiene para
+              optimizar tu administración de tu organización educativa
+            </p>
           </div>
-        </form>
-      </div>
-    </div>
 
-
-    
-
-    <!-- Hero Section --> 
-    <section class="hero">
-      <section class="container">
-        <div class="hero-content fade-out">
-          <h1>Plataforma para la administración académica</h1>
-          <p>
-            Transforma la gestión de tu institución educativa con nuestra
-            plataforma integral de administración académica, da seguimiento a proyectos, gestiona tus equipos, tareas, entregas y evaluaciones
-          </p>
-          <div class="cta-buttons">
-            <a href="#" class="btn-how-to-use" id="btn-how-to-use"
-              >Comenzar a usar</a
-            >
-            <a href="/src/pages/how-it-works.html" class="btn btn-outline">Ver cómo funciona</a>
-          </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features fade-in" id="features">
-      <div class="container">
-        <div class="section-title">
-          <h2>Características</h2>
-          <p>
-            Descubre todas las herramientas que el sistema tiene para optimizar tu
-           administración de tu organización educativa
-          </p>
-        </div>
-
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">📋</div>
-            <h3>Administración académica</h3>
-            <ul>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">📋</div>
+              <h3>Administración académica</h3>
+              <ul>
                 <li>Gestión de planes y programas de estudio</li>
                 <li>Control de asignaturas y horarios</li>
                 <li>Registro de calificaciones y evaluaciones</li>
                 <li>Control de asistencia</li>
-            </ul>
-          </div>
+              </ul>
+            </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">🧑‍🎓</div>
-            <h3>Gestión de alumnos</h3>
-            <ul>
-              <li>Inscripción y reinscripción</li>
-              <li>Expediente del alumno</li>
-              <li>Seguimiento de desempeño y reportes</li>
-            </ul>
-          </div>
+            <div class="feature-card">
+              <div class="feature-icon">🧑‍🎓</div>
+              <h3>Gestión de alumnos</h3>
+              <ul>
+                <li>Inscripción y reinscripción</li>
+                <li>Expediente del alumno</li>
+                <li>Seguimiento de desempeño y reportes</li>
+              </ul>
+            </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">🧑‍🏫</div>
-            <h3>Gestión de docentes</h3>
-            <ul>
-              <li>Asignación de grupos y materias</li>
-              <li>Control de asistencias y cargas horarias</li>
-              <li>Evaluación del desempeño docente</li>
-            </ul>
-          </div>
+            <div class="feature-card">
+              <div class="feature-icon">🧑‍🏫</div>
+              <h3>Gestión de docentes</h3>
+              <ul>
+                <li>Asignación de grupos y materias</li>
+                <li>Control de asistencias y cargas horarias</li>
+                <li>Evaluación del desempeño docente</li>
+              </ul>
+            </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">🧾</div>
-            <h3>Control administrativo y financiero</h3>
-            <ul>
-              <li>Asignación de grupos y materias</li>
-              <li>Control de asistencias y cargas horarias</li>
-              <li>Evaluación del desempeño docente</li>
-            </ul>
-          </div>
+            <div class="feature-card">
+              <div class="feature-icon">🧾</div>
+              <h3>Control administrativo y financiero</h3>
+              <ul>
+                <li>Asignación de grupos y materias</li>
+                <li>Control de asistencias y cargas horarias</li>
+                <li>Evaluación del desempeño docente</li>
+              </ul>
+            </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">✉️</div>
-            <h3>Comunicación escolar</h3>
-            <ul>
-              <li>Mensajería entre docentes y alumnos</li>
-              <li>Publicación de avisos y circulares</li>
-              <li>Calendario escolar digital</li>
-            </ul>
-          </div>
+            <div class="feature-card">
+              <div class="feature-icon">✉️</div>
+              <h3>Comunicación escolar</h3>
+              <ul>
+                <li>Mensajería entre docentes y alumnos</li>
+                <li>Publicación de avisos y circulares</li>
+                <li>Calendario escolar digital</li>
+              </ul>
+            </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">📚</div>
-            <h3>Biblioteca</h3>
-            <ul>
-              <li>Préstamo y control de materias</li>
-              <li>Acceso a contenidos digitales</li>
-            </ul>
-          </div>
+            <div class="feature-card">
+              <div class="feature-icon">📚</div>
+              <h3>Biblioteca</h3>
+              <ul>
+                <li>Préstamo y control de materias</li>
+                <li>Acceso a contenidos digitales</li>
+              </ul>
+            </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">📊</div>
-            <h3>Reportes y estadísticas</h3>
-            <ul>
-              <li>Indicadores de desempeño académico</li>
-              <li>Estadísticas de asistencia</li>
-              <li>Bajas</li>
-              <li>Egresos</li>
-              <li>Cambios</li>
-            </ul>
+            <div class="feature-card">
+              <div class="feature-icon">📊</div>
+              <h3>Reportes y estadísticas</h3>
+              <ul>
+                <li>Indicadores de desempeño académico</li>
+                <li>Estadísticas de asistencia</li>
+                <li>Bajas</li>
+                <li>Egresos</li>
+                <li>Cambios</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- FAQ Section -->
-    <section class="faq fade-in" id="faq">
-      <div class="container">
-        <div class="section-title">
-          <h2>Preguntas Frecuentes (FAQ)</h2>
-          <p>Resuelve tus dudas más comunes sobre el sistema</p>
-        </div>
+      <!-- FAQ Section -->
+      <section class="faq fade-in" id="faq">
+        <div class="container">
+          <div class="section-title">
+            <h2>Preguntas Frecuentes (FAQ)</h2>
+            <p>Resuelve tus dudas más comunes sobre el sistema</p>
+          </div>
 
-        <div class="faq-list">
-          <div class="faq-item">
-            <h3 class="faq-question">¿Cómo puedo crear una cuenta?</h3>
-            <p class="faq-answer" style="display:none;">Para crear una cuenta, haz clic en el botón "Iniciar sesión" en la esquina superior derecha, selecciona si eres alumno o docente y luego oprime "Crear cuenta". Completa el formulario con tus datos y sigue las instrucciones para crear tu cuenta.</p>
-          </div>
-          <div class="faq-item">
-            <h3 class="faq-question">¿Qué hago si olvidé mi contraseña?</h3>
-            <p class="faq-answer" style="display:none;">Si olvidaste tu contraseña, haz clic en el enlace "¿Olvidaste tu contraseña?" en la página de inicio de sesión. Ingresa tu correo electrónico registrado y recibirás un enlace para restablecer tu contraseña.</p>
-          </div>
-          <div class="faq-item">
-            <h3 class="faq-question">¿Cómo puedo inscribir a un nuevo alumno?</h3>
-            <p class="faq-answer" style="display:none;">Para inscribir a un nuevo alumno, inicia sesión con tu cuenta de docente o administrador. Navega a la sección "Gestión de Alumnos" y selecciona "Inscribir Nuevo Alumno". Completa el formulario con los datos del alumno y guarda los cambios.</p>
-          </div>
-          <div class="faq-item">
-            <h3 class="faq-question">¿Puedo acceder al sistema desde mi dispositivo móvil?</h3>
-            <p class="faq-answer" style="display:none;">Sí, el sistema está diseñado para ser responsivo y accesible desde cualquier dispositivo con conexión a internet, incluyendo smartphones y tablets.</p>
-          </div>
-          <div class="faq-item">
-            <h3 class="faq-question">¿Cómo contacto al soporte técnico?</h3>
-            <p class="faq-answer" style="display:none;">Puedes contactar al soporte técnico enviando un correo electrónico a soporte@sistema.com</p>
+          <div class="faq-list">
+            <div class="faq-item">
+              <h3 class="faq-question">¿Cómo puedo crear una cuenta?</h3>
+              <p class="faq-answer" style="display: none">
+                Para crear una cuenta, haz clic en el botón "Iniciar sesión" en
+                la esquina superior derecha, selecciona si eres alumno o docente
+                y luego oprime "Crear cuenta". Completa el formulario con tus
+                datos y sigue las instrucciones para crear tu cuenta.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h3 class="faq-question">¿Qué hago si olvidé mi contraseña?</h3>
+              <p class="faq-answer" style="display: none">
+                Si olvidaste tu contraseña, haz clic en el enlace "¿Olvidaste tu
+                contraseña?" en la página de inicio de sesión. Ingresa tu correo
+                electrónico registrado y recibirás un enlace para restablecer tu
+                contraseña.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h3 class="faq-question">
+                ¿Cómo puedo inscribir a un nuevo alumno?
+              </h3>
+              <p class="faq-answer" style="display: none">
+                Para inscribir a un nuevo alumno, inicia sesión con tu cuenta de
+                docente o administrador. Navega a la sección "Gestión de
+                Alumnos" y selecciona "Inscribir Nuevo Alumno". Completa el
+                formulario con los datos del alumno y guarda los cambios.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h3 class="faq-question">
+                ¿Puedo acceder al sistema desde mi dispositivo móvil?
+              </h3>
+              <p class="faq-answer" style="display: none">
+                Sí, el sistema está diseñado para ser responsivo y accesible
+                desde cualquier dispositivo con conexión a internet, incluyendo
+                smartphones y tablets.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h3 class="faq-question">¿Cómo contacto al soporte técnico?</h3>
+              <p class="faq-answer" style="display: none">
+                Puedes contactar al soporte técnico enviando un correo
+                electrónico a soporte@sistema.com
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-</div>
+      </section>
+    </div>
     <!-- Footer -->
     <footer>
       <div class="container">
@@ -246,7 +323,13 @@
           <div class="footer-column">
             <h3>Recursos</h3>
             <ul class="footer-links">
-              <li><a href="https://moodle.chihuahua2.tecnm.mx/login/index.php" target="_blank">Moodle</a></li>
+              <li>
+                <a
+                  href="https://moodle.chihuahua2.tecnm.mx/login/index.php"
+                  target="_blank"
+                  >Moodle</a
+                >
+              </li>
               <li><a href="#">Guías</a></li>
               <li><a href="#">Ejemplos</a></li>
             </ul>
@@ -255,8 +338,16 @@
           <div class="footer-column">
             <h3>Institución</h3>
             <ul class="footer-links">
-              <li><a href="/src/pages/about.html" target="_blank">Acerca de</a></li>
-              <li><a href="https://maps.app.goo.gl/5NaCkv4d4xsW2RKC6" target="_blank">Ubicación</a></li>
+              <li>
+                <a href="/src/pages/about.html" target="_blank">Acerca de</a>
+              </li>
+              <li>
+                <a
+                  href="https://maps.app.goo.gl/5NaCkv4d4xsW2RKC6"
+                  target="_blank"
+                  >Ubicación</a
+                >
+              </li>
               <li><a href="#" target="_blank">Contacto</a></li>
             </ul>
           </div>
@@ -265,7 +356,11 @@
             <h3>Legal</h3>
             <ul class="footer-links">
               <li><a href="#" target="_blank">Términos</a></li>
-              <li><a href="#" target="_blank">Privacidad</a></li>
+              <li>
+                <a href="/src/pages/privacy-notice.html" target="_self"
+                  >Privacidad</a
+                >
+              </li>
               <li><a href="#" target="_blank">Cookies</a></li>
             </ul>
           </div>
@@ -277,6 +372,11 @@
         </div>
       </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="src/scripts/supabase-config.js"></script>
+    <script src="src/scripts/auth.js"></script>
     <script src="src/scripts/main.js"></script>
     <script src="src/scripts/modal.js"></script>
   </body>

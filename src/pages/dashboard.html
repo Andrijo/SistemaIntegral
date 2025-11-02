@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <link rel="stylesheet" href="/src/styles/pages/dashboard.css" />
+    <link rel="stylesheet" href="/src/styles/components/navbar.css" />
+    <title>Dashboard | SGA</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <div class="container-nav">
+        <nav class="navbar">
+          <ul class="nav-links">
+            <li>
+              <a href="#" class="nav-link active" data-target="dashboard"
+                >Dashboard</a
+              >
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-target="info-escolar"
+                >Información Escolar</a
+              >
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-target="tramites">Trámites</a>
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-target="inscripciones"
+                >Inscripciones</a
+              >
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-target="evaluacion"
+                >Evaluación Docente</a
+              >
+            </li>
+          </ul>
+          <div class="user-menu">
+            <span id="userEmail">Cargando...</span>
+            <button id="logoutBtn" class="btn-logout">Cerrar Sesión</button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Contenido Principal (SPA) -->
+    <main>
+      <div class="container">
+        <!-- SECCIÓN: Dashboard -->
+        <div id="dashboard" class="page-content active-page">
+          <!-- Mensaje de Bienvenida -->
+          <section class="welcome-section">
+            <h1>Bienvenido al Sistema de Gestión Académica</h1>
+            <p class="user-info">
+              Usuario: <strong id="userEmailDisplay">Cargando...</strong>
+            </p>
+            <p class="login-time">
+              Última sesión: <span id="loginTime">-</span>
+            </p>
+          </section>
+          <div class="correos">
+            <h3>Correos de tus profesores:</h3>
+            <table style="width: 100%">
+              <thead style="width: 100%">
+                <tr style="gap: 2rem">
+                  <td style="margin-left: 2rem">Materia</td>
+                  <td style="margin-left: 2rem; text-align: center">Grupo</td>
+                  <td style="margin-left: 2rem; text-align: center">
+                    Profesor
+                  </td>
+                  <td style="margin-left: 2rem; text-align: center">Correo</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>5P6</td>
+                  <td>B</td>
+                  <td>Jesús Mario Espadas Roque</td>
+                  <td>jesus.er@chihuahua2.tecnm.mx</td>
+                </tr>
+                <tr>
+                  <td>1P7</td>
+                  <td>B</td>
+                  <td>José Carlos Rodríguez Baeza</td>
+                  <td>rod.carlos0102@gmail.com</td>
+                </tr>
+                <tr>
+                  <td>2P6</td>
+                  <td>B</td>
+                  <td>Sergio Antonio Talavera Carbajal</td>
+                  <td>sergio.tc@chihuahua2.tecnm.mx</td>
+                </tr>
+                <tr>
+                  <td>4P6</td>
+                  <td>A</td>
+                  <td>Ignacio López Villalobos</td>
+                  <td>lopez.iv@chihuahua2.tecnm.mx</td>
+                </tr>
+                <tr>
+                  <td>5P5</td>
+                  <td>B</td>
+                  <td>Joel Adán Saldaña Villalba</td>
+                  <td>joel.sv@chihuahua2.tecnm.mx/td></td>
+                </tr>
+
+                <tr>
+                  <td>FS1</td>
+                  <td>A</td>
+                  <td>Leonardo Nevarez Chávez</td>
+                  <td>leonardo.nc@chihuahua2.tecnm.mx</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SECCIÓN: Información Escolar -->
+        <div id="info-escolar" class="page-content">
+          <section class="content-section">
+            <h1>Información Escolar</h1>
+            <div class="content-grid">
+              <div class="content-block">
+                <h2>Datos Generales</h2>
+                <form>
+                  <div class="form-group">
+                    <label for="nombre" style="margin-top: 1rem"
+                      >Nombre Completo</label
+                    >
+                    <input
+                      type="text"
+                      id="nombre"
+                      value="Andy Espino Cabrales"
+                      readonly />
+                  </div>
+                  <div class="form-group">
+                    <label for="matricula" style="margin-top: 1rem"
+                      >Matrícula</label
+                    >
+                    <input
+                      type="text"
+                      id="matricula"
+                      value="21550346"
+                      readonly />
+                  </div>
+                  <div class="form-group" style="margin-top: 1rem">
+                    <label for="carrera">Carrera</label>
+                    <input
+                      type="text"
+                      id="carrera"
+                      value="Ingeniería en Sistemas Computacionales"
+                      readonly />
+                  </div>
+                </form>
+              </div>
+              <div class="content-block">
+                <h2>Datos Socioeconómicos</h2>
+                <p style="margin-top: 1rem">
+                  Información sobre becas, apoyos y situación económica.
+                </p>
+                <button
+                  id="información"
+                  class="btn-primary"
+                  style="margin-top: 1rem; background-color: var(--pantone)">
+                  Información
+                </button>
+              </div>
+              <div>
+                <h2>Horario de Materias</h2>
+                <table style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th style="margin-left: 1rem">Lunes</th>
+                      <th style="margin-left: 1rem">Martes</th>
+                      <th style="margin-left: 1rem">Miercoles</th>
+                      <th style="margin-left: 1rem">Jueves</th>
+                      <th style="margin-left: 1rem">Viernes</th>
+                    </tr>
+                  </thead>
+                  <tbody style="gap: 1rem">
+                    <tr>
+                      <td>10:00-11:00 Administración de Base de Datos</td>
+                      <td>10:00-11:00 Administración de Base de Datos</td>
+                      <td>10:00-11:00 Administración de Base de Datos</td>
+                      <td>10:00-11:00 Administración de Base de Datos</td>
+                      <td>10:00-11:00 Administración de Base de Datos</td>
+                    </tr>
+                    <tr>
+                      <td>13:00-14:00 Taller de Sistemas Operativos</td>
+                      <td>13:00-14:00 Taller de Sistemas Operativos</td>
+                      <td>13:00-14:00 Taller de Sistemas Operativos</td>
+                      <td>13:00-14:00 Taller de Sistemas Operativos</td>
+                      <td>13:00-14:00 Taller de Sistemas Operativos</td>
+                    </tr>
+                    <tr>
+                      <td>14:00-15:00 Programación Frontend</td>
+                      <td>14:00-15:00 Programación Frontend</td>
+                      <td>14:00-15:00 Programación Frontend</td>
+                      <td>14:00-15:00 Programación Frontend</td>
+                      <td>14:00-15:00 Programación Frontend</td>
+                    </tr>
+                    <tr>
+                      <td>15:00-16:00 Ingeniería de Software</td>
+                      <td>15:00-16:00 Ingeniería de Software</td>
+                      <td>15:00-16:00 Ingeniería de Software</td>
+                      <td>15:00-16:00 Ingeniería de Software</td>
+                      <td>15:00-16:00 Ingeniería de Software</td>
+                    </tr>
+                    <tr>
+                      <td>17:00-18:00 Arquitectura de Computadoras</td>
+                      <td>17:00-18:00 Arquitectura de Computadoras</td>
+                      <td>17:00-18:00 Arquitectura de Computadoras</td>
+                      <td>17:00-18:00 Arquitectura de Computadoras</td>
+                      <td>17:00-18:00 Arquitectura de Computadoras</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- SECCIÓN: Trámites -->
+        <div id="tramites" class="page-content">
+          <section class="content-section">
+            <h1>Trámites Escolares</h1>
+            <div class="content-grid">
+              <div class="content-block">
+                <h2>Inglés</h2>
+                <p>
+                  Consulta tu nivel de inglés y fechas de exámenes de
+                  acreditación.
+                </p>
+                <p><strong>Nivel Actual:</strong> B2</p>
+                <button
+                  class="btn-primary"
+                  style="background-color: var(--pantone); margin-top: 1rem"
+                  data-target="ingles">
+                  Ver Próximas Fechas
+                </button>
+              </div>
+              <div class="content-block">
+                <h2>Servicio Social</h2>
+                <p>
+                  Revisa tu progreso y registra tus horas de servicio social.
+                </p>
+                <p><strong>Horas Acreditadas:</strong> 0 / 480</p>
+                <button
+                  class="btn-primary"
+                  style="background-color: var(--pantone); margin-top: 1rem">
+                  Registrar Horas
+                </button>
+              </div>
+              <div class="content-block">
+                <h2>Credencial Escolar</h2>
+                <p>Solicita la reposición o renovación de tu credencial.</p>
+                <button
+                  class="btn-primary"
+                  style="background-color: var(--pantone); margin-top: 1rem"
+                  data-target="credencial">
+                  Solicitar Reposición
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- SECCIÓN: Inscripciones -->
+        <div id="inscripciones" class="page-content">
+          <section class="content-section">
+            <h1>Inscripciones</h1>
+            <div class="content-block">
+              <h2>Selección de Materias</h2>
+              <p>
+                El periodo de selección de materias para el próximo semestre aún
+                no se encuentra abierto, vuelve despúes.
+              </p>
+              <form>
+                <div class="form-group" style="margin-top: 1rem">
+                  <label for="materia1">Materia 1</label>
+                  <select id="materia1" disabled>
+                    <option>Selecciona una materia...</option>
+                    <option>Cálculo Integral</option>
+                    <option>Programación Orientada a Objetos</option>
+                    <option>Estructura de Datos</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="materia2">Materia 2</label>
+                  <select id="materia2" disabled>
+                    <option>Selecciona una materia...</option>
+                    <option>Álgebra Lineal</option>
+                    <option>Redes de Computadoras</option>
+                    <option>Sistemas Operativos</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="materia2">Materia 2</label>
+                  <select id="materia2" disabled>
+                    <option>Selecciona una materia...</option>
+                    <option>Álgebra Lineal</option>
+                    <option>Redes de Computadoras</option>
+                    <option>Sistemas Operativos</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="materia2">Materia 3</label>
+                  <select id="materia2" disabled>
+                    <option>Selecciona una materia...</option>
+                    <option>Álgebra Lineal</option>
+                    <option>Redes de Computadoras</option>
+                    <option>Sistemas Operativos</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="materia2">Materia 4</label>
+                  <select id="materia2" disabled>
+                    <option>Selecciona una materia...</option>
+                    <option>Álgebra Lineal</option>
+                    <option>Redes de Computadoras</option>
+                    <option>Sistemas Operativos</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="materia2">Materia 5</label>
+                  <select id="materia2" disabled>
+                    <option>Selecciona una materia...</option>
+                    <option>Álgebra Lineal</option>
+                    <option>Redes de Computadoras</option>
+                    <option>Sistemas Operativos</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="materia2">Materia 6</label>
+                  <select id="materia2" disabled>
+                    <option>Selecciona una materia...</option>
+                    <option>Álgebra Lineal</option>
+                    <option>Redes de Computadoras</option>
+                    <option>Sistemas Operativos</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn-primary">
+                  Enviar Selección
+                </button>
+              </form>
+              <button class="materia-success btn-logout" disabled>
+                Aceptar
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- SECCIÓN: Evaluación Docente -->
+        <div id="evaluacion" class="page-content">
+          <section class="content-section">
+            <h1>Evaluación Docente</h1>
+            <div class="message-box">
+              <p>Aún no es momento para la Evaluación Docente.</p>
+              <p><small>Las fechas se publicarán próximamente.</small></p>
+            </div>
+            <div class="">
+              <p style="margin-top: 2rem">
+                Si es un error, hágalo saber al departamento de desarrollo
+                acádemico
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sección inglés -->
+        <div id="ingles" class="page-content">
+          <section class="content-section">
+            <h1>Próximas Fechas de Exámenes de Inglés</h1>
+            <div class="content-block">
+              <h2>Fechas Disponibles:</h2>
+              <p>
+                Actualmente no hay fechas disponibles, vuelva en otro momento.
+              </p>
+              <p style="margin-top: 1rem">
+                Siga atento a nuestras redes sociales.
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sección credencial -->
+        <div id="credencial" class="page-content">
+          <section class="content-section">
+            <h1>Solicitud de Reposición de Credencial Escolar</h1>
+            <div class="content-block">
+              <h2 style="margin-top: 1rem">Instrucciones:</h2>
+              <p style="margin-top: 1rem">
+                Para solicitar la reposición de tu credencial escolar, por favor
+                acude a la oficina de servicios escolares con una copia de tu
+                identificación oficial y una fotografía reciente.
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="copyright">
+          &copy; 2025 Sistema de Gestión Académica. Todos los derechos
+          reservados.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
+
+      // Configuración de Supabase
+      const SUPABASE_URL = "https://uznqokybucscboikanfc.supabase.co"
+      const SUPABASE_ANON_KEY = "sb_publishable_ImmUkkSBODuqU7UP7hOfnA_Q7sU21tG"
+
+      const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+      // --- Lógica de la SPA ---
+
+      const navLinks = document.querySelectorAll(".nav-link")
+      const contentPages = document.querySelectorAll(".page-content")
+
+      function showPage(targetId) {
+        // Ocultar todas las páginas
+        contentPages.forEach((page) => {
+          page.classList.remove("active-page")
+        })
+
+        // Quitar 'active' de todos los enlaces
+        navLinks.forEach((link) => {
+          link.classList.remove("active")
+        })
+
+        // Mostrar la página seleccionada
+        const targetPage = document.getElementById(targetId)
+        if (targetPage) {
+          targetPage.classList.add("active-page")
+        }
+
+        // Marcar el enlace de nav como activo
+        const activeLink = document.querySelector(
+          `.nav-link[data-target="${targetId}"]`
+        )
+        if (activeLink) {
+          activeLink.classList.add("active")
+        }
+      }
+
+      // Agregar event listeners a los enlaces de navegación
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault() // Prevenir recarga de página
+          const targetId = link.getAttribute("data-target")
+          showPage(targetId)
+        })
+      })
+
+      // Agregar event listeners a los botones de trámites (Inglés y Credencial)
+      document.querySelectorAll("button[data-target]").forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault()
+          const targetId = btn.getAttribute("data-target")
+          showPage(targetId)
+        })
+      })
+
+      // --- Lógica de Autenticación (Existente) ---
+
+      // Verificar autenticación
+      async function checkAuth() {
+        const {
+          data: { user },
+          error,
+        } = await supabase.auth.getUser()
+
+        if (error || !user) {
+          // No hay usuario autenticado, redirigir al login
+          window.location.href = "/index.html"
+          return
+        }
+
+        // Usuario autenticado, mostrar información
+        document.getElementById("userEmail").textContent = user.email
+        document.getElementById("userEmailDisplay").textContent = user.email
+
+        // Mostrar fecha de último acceso
+        if (user.last_sign_in_at) {
+          const lastLogin = new Date(user.last_sign_in_at)
+          document.getElementById("loginTime").textContent =
+            lastLogin.toLocaleString("es-MX")
+        }
+      }
+
+      // Función para cerrar sesión
+      async function logout() {
+        // Se elimina el 'confirm()' para evitar bloquear la UI en iframes
+        // const confirmLogout = confirm("¿Estás seguro que deseas cerrar sesión?")
+        // if (confirmLogout) { ... }
+
+        const { error } = await supabase.auth.signOut()
+
+        if (error) {
+          // Se reemplaza 'alert()' con 'console.error()'
+          console.error("Error al cerrar sesión:", error.message)
+        } else {
+          // Redirigir al inicio
+          window.location.href = "/index.html"
+        }
+      }
+
+      // Event listeners
+      document.getElementById("logoutBtn").addEventListener("click", logout)
+
+      // Verificar autenticación al cargar
+      checkAuth()
+
+      // Listener para cambios de autenticación
+      supabase.auth.onAuthStateChange((event, session) => {
+        if (event === "SIGNED_OUT") {
+          window.location.href = "/index.html"
+        }
+      })
+
+      const informacion = document.getElementById("información")
+      informacion.addEventListener("click", () => {
+        const userConfirmed = confirm(
+          "¿Deseas ver la información socioeconómica?"
+        )
+        if (userConfirmed) {
+          // Redirigir a la página de información socioeconómica
+          window.location.href = "https://www.becabenitojuarez.gob.mx/"
+        } else {
+          console.log("El usuario canceló la acción.")
+        }
+      })
+    </script>
+  </body>
+</html>
