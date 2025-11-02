@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/public/favicon.webp" type="image/x-icon" />
-    <link rel="stylesheet" href="/src/styles/pages/about.css" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
     <title>Acerca de | SGA</title>
   </head>
   <body>
@@ -13,17 +13,23 @@
       <div class="container">
         <nav class="navbar nav-links">
           <div class="logo">
-            <a href="#">Sistema de Gestión Académica </a>
+            <a href="/index.html">SGA</a>
           </div>
           <ul class="nav-links">
-            <li>
-              <a href="/index.html">Inicio</a>
-            </li>
             <li>
               <a href="/index.html#features">Características</a>
             </li>
             <li>
+              <a href="/src/pages/how-it-works.html">Cómo funciona</a>
+            </li>
+            <li>
               <a href="/index.html#faq">FAQ</a>
+            </li>
+            <li>
+              <a href="#" aria-disabled="true">Acerca de</a>
+            </li>
+            <li>
+              <a href="/src/pages/privacy-notice.html">Aviso de privacidad</a>
             </li>
             <li>
               <a href="#" class="btn btn-outline login-btn" id="loginBtn"
@@ -34,47 +40,119 @@
         </nav>
       </div>
     </header>
-
     <!-- Contenido de la página acerca de -->
-      <section>
-        <h2>Objetivo general:</h2>
-        <p>
-          Desarrollar una plataforma web que permita a estudiantes y docentes
-          organizar y dar seguimiento a proyectos escolares colaborativos
-          mediante funcionalidades de gestión de equipos, tareas, entregas y
-          evaluaciones
-        </p>
-      </section>
-      <section>
-        <h2>Objetivos específicos:</h2>
-        <ul>
-          <li>
-            Permitir la creación y administración de proyectos por parte de
-            docentes
-          </li>
-          <li>Facilitar la integración de equipos de trabajo entre alumnos</li>
-          <li>Asignar y dar seguimiento a tareas y entregas</li>
-          <li>
-            Brindar herramientas de comunicación interna y evaluación de
-            desempeño
-          </li>
-          <li>Generar reportes de avances por proyecto y por usuario</li>
-        </ul>
-      </section>
+    <section
+      class="about-container"
+      id="about"
+      style="
+        max-width: 900px;
+        margin: 6.5rem auto;
+        padding: 20px;
+        border-radius: 8px;
+      ">
+      <h2 style="margin: 0.7rem auto">Objetivo general:</h2>
+      <p>
+        Desarrollar una plataforma web que permita a estudiantes y docentes
+        organizar y dar seguimiento a proyectos escolares colaborativos mediante
+        funcionalidades de gestión de equipos, tareas, entregas y evaluaciones
+      </p>
+      <h2 style="margin: 0.7rem auto">Objetivos específicos:</h2>
+      <ul style="margin-left: 2rem">
+        <li>
+          Permitir la creación y administración de proyectos por parte de
+          docentes
+        </li>
+        <li>Facilitar la integración de equipos de trabajo entre alumnos</li>
+        <li>Asignar y dar seguimiento a tareas y entregas</li>
+        <li>
+          Brindar herramientas de comunicación interna y evaluación de desempeño
+        </li>
+        <li>Generar reportes de avances por proyecto y por usuario</li>
+      </ul>
+
+      <h2 style="margin: 0.7rem auto">Alcance del proyecto</h2>
+      <p style="font-weight: 600">Incluye:</p>
+      <ul style="margin-left: 2rem">
+        <li>Registro de usuarios</li>
+        <li>Creación y asignación de proyectos</li>
+        <li>Administración de equipos y tareas</li>
+        <li>Subida de archivos</li>
+        <li>Registro de avances y comentarios</li>
+        <li>Panel de administración para docentes</li>
+        <li>Notificaciones internas</li>
+      </ul>
     </section>
-    <section>
-      <section>
-        <h2>Alcance del proyecto</h2>
-        <h4>Incluye:</h4>
-        <ul>
-          <li>Registro de usuarios</li>
-          <li>Creación y asignación de proyectos</li>
-          <li>Administración de equipos y tareas</li>
-          <li>Subida de archivos</li>
-          <li>Registro de avances y comentarios</li>
-          <li>Panel de administración para docentes</li>
-          <li>Notificaciones internas</li>
-        </ul>
-      </section>
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <div class="logo">Sistema de Gestion Académica</div>
+            <p style="color: #aaa; margin-top: 15px">
+              Simplifica procesos complejos, desde la inscripción de estudiantes
+              hasta la generación de reportes académicos, todo en un solo lugar.
+            </p>
+            <div class="social-links" style="margin-top: 20px">
+              <a href="#" class="social-link">f</a>
+              <a href="#" class="social-link">t</a>
+              <a href="#" class="social-link">in</a>
+              <a href="#" class="social-link">ig</a>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Recursos</h3>
+            <ul class="footer-links">
+              <li>
+                <a
+                  href="https://moodle.chihuahua2.tecnm.mx/login/index.php"
+                  target="_blank"
+                  >Moodle</a
+                >
+              </li>
+              <li><a href="#">Guías</a></li>
+              <li><a href="#">Ejemplos</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Institución</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="/src/pages/about.html" target="_blank">Acerca de</a>
+              </li>
+              <li>
+                <a
+                  href="https://maps.app.goo.gl/5NaCkv4d4xsW2RKC6"
+                  target="_blank"
+                  >Ubicación</a
+                >
+              </li>
+              <li><a href="#" target="_blank">Contacto</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Legal</h3>
+            <ul class="footer-links">
+              <li><a href="#" target="_blank">Términos</a></li>
+              <li>
+                <a href="/src/pages/privacy-notice.html" target="_self"
+                  >Privacidad</a
+                >
+              </li>
+              <li><a href="#" target="_blank">Cookies</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="copyright">
+          &copy; 2025 Sistema de Gestión Académica. Todos los derechos
+          reservados.
+        </div>
+      </div>
+    </footer>
   </body>
+  <script src="src/scripts/main.js"></script>
+  <script src="src/scripts/modal.js"></script>
 </html>

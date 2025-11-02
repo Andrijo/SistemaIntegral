@@ -7,12 +7,11 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Montse;
-  color: var(--white-color);
+  color: var(--pantone);
 }
 
 body {
   background-color: var(--white-color);
-  color: var(--pantone); /* Color del texto */
   line-height: 1.6; /* Espacio entre líneas */
   font-family: Montse, sans-serif;
   display: flex;
@@ -119,11 +118,12 @@ body {
 
 .feature-card {
   text-align: center;
-  background-color: var(--pantone);
   border-radius: 8px;
   padding: 30px;
   font-weight: 500;
   transition: transform 0.3s, box-shadow 0.3s;
+  color: var(--white-color);
+  border: 1px solid var(--pantone);
 }
 
 .feature-card:hover {

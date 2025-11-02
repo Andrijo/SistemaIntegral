@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test Supabase</title>
+  </head>
+  <body>
+    <h1>Test de Supabase</h1>
+    <div id="status"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      const status = document.getElementById("status")
+
+      if (typeof window.supabase !== "undefined") {
+        status.innerHTML += "<p>✅ Supabase cargado</p>"
+
+        const client = window.supabase.createClient(
+          "https://uznqokybucscboikanfc.supabase.co",
+          "sb_publishable_ImmUkkSBODuqU7UP7hOfnA_Q7sU21tG"
+        )
+
+        if (client) {
+          status.innerHTML += "<p>✅ Cliente creado exitosamente</p>"
+        }
+      } else {
+        status.innerHTML += "<p>❌ Supabase NO cargado</p>"
+      }
+    </script>
+  </body>
+</html>

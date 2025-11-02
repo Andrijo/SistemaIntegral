@@ -3,124 +3,150 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cómo funciona | SAG</title>
     <link rel="shortcut icon" href="/public/favicon.webp" type="image/x-icon" />
-    <title>Cómo funciona | SGA</title>
-    <link rel="stylesheet" href="/src/styles/pages/how-it-works.css" />
+    <link rel="stylesheet" href="../styles/global.css" />
   </head>
   <body>
-    <a href="/index.html" class="back-btn">← Volver al inicio</a>
-    <div class="header">
-      <h1>Glosario</h1>
-      <h3>da click en lo que deseas buscar</h3>
-      <ul style="list-style: none; padding: 0">
-        <li>
-          <a
-            href="#cuenta-alumnos"
-            class="glosario-link"
-            style="color: #1b396a; text-decoration: underline"
-            >Creación de cuenta (alumnos)</a
-          >
-        </li>
-        <li>
-          <a
-            href="#cuenta-tutores"
-            class="glosario-link"
-            style="color: #1b396a; text-decoration: underline"
-            >Creación de cuenta (tutores)</a
-          >
-        </li>
-        <li>
-          <a
-            href="#inicio-alumnos"
-            class="glosario-link"
-            style="color: #1b396a; text-decoration: underline"
-            >Inicio de sesión (alumnos)</a
-          >
-        </li>
-        <li>
-          <a
-            href="#inicio-tutores"
-            class="glosario-link"
-            style="color: #1b396a; text-decoration: underline"
-            >Inicio de sesión (tutores)</a
-          >
-        </li>
-        <li>
-          <a
-            href="#control-de-materias-tutor"
-            class="glosario-link"
-            style="color: #1b396a; text-decoration: underline"
-            >control de materias (tutores)</a
-          >
-        </li>
-        <li>
-          <a
-            href="#control-de-materias-alumno"
-            class="glosario-link"
-            style="color: #1b396a; text-decoration: underline"
-            >control de materias (alumno)</a
-          >
-        </li>
+    <div class="main">
+      <!-- Navbar -->
+      <header>
+        <div class="container">
+          <nav class="navbar nav-links">
+            <ul class="nav-links">
+              <li class="logo">
+                <a href="/index.html">SGA</a>
+              </li>
+              <li>
+                <a href="/index.html#features">Características</a>
+              </li>
+              <li>
+                <a href="#" aria-disabled="true">Cómo funciona</a>
+              </li>
+              <li>
+                <a href="/index.html#faq">FAQ</a>
+              </li>
+              <li>
+                <a href="/src/pages/about.html">Acerca de</a>
+              </li>
+              <li>
+                <a href="/src/pages/privacy-notice.html" aria-disabled="true"
+                  >Aviso de privacidad</a
+                >
+              </li>
+            </ul>
+            <div class="login">
+              <a href="#" class="login-btn" id="loginBtn">Iniciar sesión</a>
+            </div>
+          </nav>
+        </div>
+      </header>
+    </div>
+    <div
+      class="how-it-works"
+      id="how-it-works"
+      style="
+        width: 900px;
+        margin: 8rem auto;
+        padding: 20px;
+        border-radius: 8px;
+      ">
+      <h1>Cómo funciona el sistema:</h1>
+
+      <h3 style="margin: 0.7rem auto">Creación de cuentas:</h3>
+      <p>
+        Para crear una cuenta, dar clic en registra nuevo usuario dentro del
+        modal de inicio de sesión.
+      </p>
+      <h3 style="margin: 0.7rem auto">Inicio de sesión:</h3>
+      <p>
+        Para iniciar sesión es necesario tener una cuenta dentro de la base de
+        datos, si ya tienes una, da clic en el botón de la esquina superior
+        derecha, introduce tus credenciales y da clic en "iniciar sesión", si
+        tus credenciales son correctas, debería de mostrar el sistema.
+      </p>
+      <h3 style="margin: 0.7rem auto">
+        información que provee el sistema (idealmente):
+      </h3>
+      <ul style="margin-left: 2rem">
+        <li>Información general de los estudiantes</li>
+        <li>Trámites estudiantiles</li>
+        <li>Inscripciones de alumnos</li>
+        <li>Evaluación docente</li>
+        <li>Información de contacto</li>
       </ul>
     </div>
-    <div class="container">
-      <div class="box" id="cuenta-alumnos">
-        <h2>Creacion de cuenta (alumnos)</h2>
-        <p>
-          Dar click en el boton superior derecho de inicio de sesion y luego
-          clickear el texto de creacion de cuenta, despues se abrira una nueva
-          ventana lo primero sera marcar la seccion que dice "alumno" en la cual
-          se debera agregar la informacion requerida para crear una cuenta
-          nombre,email,telefono etc...
-        </p>
-      </div>
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <div class="logo">Sistema de Gestion Académica</div>
+            <p style="color: #aaa; margin-top: 15px">
+              Simplifica procesos complejos, desde la inscripción de estudiantes
+              hasta la generación de reportes académicos, todo en un solo lugar.
+            </p>
+            <div class="social-links" style="margin-top: 20px">
+              <a href="#" class="social-link">f</a>
+              <a href="#" class="social-link">t</a>
+              <a href="#" class="social-link">in</a>
+              <a href="#" class="social-link">ig</a>
+            </div>
+          </div>
 
-      <div class="box" id="cuenta-tutores">
-        <h2>Creacion de cuenta (tutores)</h2>
-        <p>
-          Dar click en el boton superior derecho de inicio de sesion y luego
-          clickear el texto de creacion de cuenta, despues se abrira una nueva
-          ventana lo primero sera marcar la seccion que dice "tutores" en la
-          cual se debera agregar la informacion requerida para crear una cuenta
-          nombre,email,telefono etc...
-        </p>
-      </div>
+          <div class="footer-column">
+            <h3>Recursos</h3>
+            <ul class="footer-links">
+              <li>
+                <a
+                  href="https://moodle.chihuahua2.tecnm.mx/login/index.php"
+                  target="_blank"
+                  >Moodle</a
+                >
+              </li>
+              <li><a href="#">Guías</a></li>
+              <li><a href="#">Ejemplos</a></li>
+            </ul>
+          </div>
 
-      <div class="box" id="inicio-alumnos">
-        <h2>Inicio de sesion (alumnos)</h2>
-        <p>
-          Clickear el botón superior derecho, colocar su nombre de usuario y
-          contrasenia y presionar enter o dar click al boton de ingresar.
-        </p>
-      </div>
+          <div class="footer-column">
+            <h3>Institución</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="/src/pages/about.html" target="_blank">Acerca de</a>
+              </li>
+              <li>
+                <a
+                  href="https://maps.app.goo.gl/5NaCkv4d4xsW2RKC6"
+                  target="_blank"
+                  >Ubicación</a
+                >
+              </li>
+              <li><a href="#" target="_blank">Contacto</a></li>
+            </ul>
+          </div>
 
-      <div class="box" id="inicio-tutores">
-        <h2>Inicio de sesion (tutores)</h2>
-        <p>
-          Clickear el botón superior derecho, colocar su nombre de usuario y
-          contrasenia y presionar enter o dar click al boton de ingresar.
-        </p>
-      </div>
+          <div class="footer-column">
+            <h3>Legal</h3>
+            <ul class="footer-links">
+              <li><a href="#" target="_blank">Términos</a></li>
+              <li>
+                <a href="/src/pages/privacy-notice.html" target="_self"
+                  >Privacidad</a
+                >
+              </li>
+              <li><a href="#" target="_blank">Cookies</a></li>
+            </ul>
+          </div>
+        </div>
 
-      <div class="box" id="control-de-materias-tutor">
-        <h2>Control de materias (tutores)</h2>
-        <p>
-          Una vez iniciada la sesion dar click en la seccion "materias" se
-          abrira una lista con sus alumno asignados donde podra gestionar las
-          materias de los alumnos individualmente
-        </p>
+        <div class="copyright">
+          &copy; 2025 Sistema de Gestión Académica. Todos los derechos
+          reservados.
+        </div>
       </div>
-
-      <div class="box" id="control-de-materias-alumno">
-        <h2>Control de materias (alumno)</h2>
-        <p>
-          U na vez iniciada la sesion dar click en la seccion "materias" podras
-          observar las materias que llevas y tendras la opcion de salir del
-          curso si asi lo deseas
-        </p>
-      </div>
-    </div>
-
-    <script src="/src/scripts/how-it-works.js"></script>
+    </footer>
   </body>
+  <script src="src/scripts/main.js"></script>
+  <script src="src/scripts/modal.js"></script>
 </html>
