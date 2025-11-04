@@ -113,11 +113,11 @@
                                 <form>
                                   <div class="form-group">
                                     <label for="nombre" style="margin-top: 1rem">Nombre Completo</label>
-                                    <input type="text" id="nombre" value="Andy Espino Cabrales" readonly />
+                                    <input type="text" id="nombre" value="Edson Flores Dominguez" readonly />
                                   </div>
                                   <div class="form-group">
                                     <label for="matricula" style="margin-top: 1rem">Matrícula</label>
-                                    <input type="text" id="matricula" value="21550346" readonly />
+                                    <input type="text" id="matricula" value="21550298" readonly />
                                   </div>
                                   <div class="form-group" style="margin-top: 1rem">
                                     <label for="carrera">Carrera</label>
@@ -182,6 +182,15 @@
                                 </table>
                               </div>
                             </div>
+
+                            <!-- Sección de Calificaciones -->
+                            <section class="content-section" style="margin-top: 2rem;">
+                              <h2>Calificaciones</h2>
+                              <div class="content-block" style="background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                                <canvas id="gradesChart" width="800" height="300" style="max-width: 100%; background: #fff; border: 1px solid #eee; border-radius: 6px;"></canvas>
+                                <p id="gradesPlaceholder" style="margin-top: 1rem; color: #666; text-align: center;">Aún no hay calificaciones registradas.</p>
+                              </div>
+                            </section>
                           </section>
                         </div>
 
@@ -194,13 +203,16 @@
                                 <h2>Inglés</h2>
                                 <p>Consulta tu nivel de inglés y fechas de exámenes de acreditación.</p>
                                 <p><strong>Nivel Actual:</strong> B2</p>
-                                <button class="btn-primary" style="background-color: var(--pantone); margin-top: 1rem" data-target="ingles">Ver Próximas Fechas</button>
+                                  <div style="margin-top: 1rem; display: flex; gap: 0.5rem; align-items: center;">
+                                    <button class="btn-primary" style="background-color: var(--pantone);" data-target="ingles">Ver Próximas Fechas</button>
+                                    <a href="https://chihuahua2.tecnm.mx/aprende-ingles-en-modalidad-hibrida-en-el-tecnologico-de-chihuahua-ii/" target="_blank" rel="noopener noreferrer" class="btn-primary" style="background-color: var(--pantone); display: inline-block; text-decoration: none; color: #fff; padding: 0.5rem 0.9rem; border-radius: 4px;">Aprende Inglés (Sitio)</a>
+                                  </div>
                               </div>
                               <div class="content-block">
                                 <h2>Servicio Social</h2>
                                 <p>Revisa tu progreso y registra tus horas de servicio social.</p>
                                 <p><strong>Horas Acreditadas:</strong> 0 / 480</p>
-                                <button class="btn-primary" style="background-color: var(--pantone); margin-top: 1rem">Registrar Horas</button>
+                                  <button id="btnServicioSocial" class="btn-primary" style="background-color: var(--pantone); margin-top: 1rem">Registrar Horas</button>
                               </div>
                               <div class="content-block">
                                 <h2>Credencial Escolar</h2>
@@ -242,6 +254,11 @@
                             <div class="">
                               <p style="margin-top: 2rem">Si es un error, hágalo saber al departamento de desarrollo acádemico</p>
                             </div>
+
+                            <!-- Botón a SII del Tecnológico -->
+                            <div style="margin-top: 1.5rem">
+                              <a href="https://sii.chihuahua2.tecnm.mx/" target="_blank" rel="noopener noreferrer" class="btn-primary" style="background-color: var(--pantone); padding: 0.6rem 1rem; display: inline-block; text-decoration: none; color: #fff; border-radius: 4px">Ir a Evaluación Docente (SII)</a>
+                            </div>
                           </section>
                         </div>
 
@@ -281,6 +298,16 @@
                     <script src="/src/scripts/storage-local.js"></script>
                     <script type="module">
                       import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
+                      // Cargar Chart.js de forma dinámica para evitar que una falla en el CDN rompa todo el módulo
+                      let Chart = null
+                      (async () => {
+                        try {
+                          const mod = await import("https://cdn.jsdelivr.net/npm/chart.js@4.4.1/+esm")
+                          Chart = mod.default || mod.Chart || mod
+                        } catch (err) {
+                          console.warn('No se pudo cargar Chart.js:', err)
+                        }
+                      })()
 
                       // Configuración de Supabase
                       const SUPABASE_URL = "https://uznqokybucscboikanfc.supabase.co"
@@ -356,6 +383,15 @@
                         })
                       }
 
+                      // Servicio Social: alerta si no hay créditos suficientes
+                      const servicioBtn = document.getElementById('btnServicioSocial')
+                      if (servicioBtn) {
+                        servicioBtn.addEventListener('click', (e) => {
+                          e.preventDefault()
+                          alert('No tienes suficientes créditos para realizar el servicio social.')
+                        })
+                      }
+
                       /* -------------------------
                          Inscripciones: lógica de profesores, selección y prevención de empalmes
                       ------------------------- */
@@ -375,6 +411,16 @@
                           { id: 't_laura', name: 'Laura Castillo', email: 'laura.castillo@example.com', phone: '+52 1 55 3030 4040', classes: [ { id: 'c_laura_1', subject: 'Filosofía', day: 'Miércoles', start: '13:00', end: '14:30' }, { id: 'c_laura_2', subject: 'Programación', day: 'Lunes', start: '09:00', end: '10:30' } ] }
                         ]
                         teachers.forEach(t => StorageLocal.upsert('teachers', t))
+
+                        // Agregar algunas calificaciones de ejemplo
+                        const exampleGrades = [
+                          { id: 'sel_1', classId: 'c_ana_1', teacherId: 't_ana', teacherName: 'Ana García', subject: 'Matemáticas I', day: 'Lunes', start: '09:00', end: '10:30', grade: 85, selectedAt: new Date().toISOString() },
+                          { id: 'sel_2', classId: 'c_maria_1', teacherId: 't_maria', teacherName: 'María López', subject: 'Programación', day: 'Martes', start: '09:00', end: '10:30', grade: 92, selectedAt: new Date().toISOString() },
+                          { id: 'sel_3', classId: 'c_sofia_1', teacherId: 't_sofia', teacherName: 'Sofía Martínez', subject: 'Bases de Datos', day: 'Jueves', start: '09:00', end: '10:30', grade: 88, selectedAt: new Date().toISOString() },
+                          { id: 'sel_4', classId: 'c_carlos_1', teacherId: 't_carlos', teacherName: 'Carlos Ruiz', subject: 'Redes', day: 'Miércoles', start: '09:00', end: '10:30', grade: 95, selectedAt: new Date().toISOString() }
+                        ]
+                        StorageLocal.clearStore('selections') // Limpiar selecciones anteriores
+                        exampleGrades.forEach(g => StorageLocal.upsert('selections', g))
                       }
 
                       function renderTeachers() {
@@ -446,6 +492,8 @@
                         selList.innerHTML = ''
                         if (!selections.length) {
                           selList.innerHTML = '<li>(sin selecciones)</li>'
+                          // actualizar gráfica (estado vacío)
+                          renderGradesChart()
                           return
                         }
                         selections.forEach(s => {
@@ -461,6 +509,8 @@
                           li.appendChild(btn)
                           selList.appendChild(li)
                         })
+                        // actualizar gráfica (si hay calificaciones asociadas)
+                        renderGradesChart()
                       }
 
                       (function setupInscripciones() {
@@ -478,12 +528,52 @@
 
                         const btnConfirm = document.getElementById('btnConfirmSchedule')
                         if (btnConfirm) {
-                          btnConfirm.addEventListener('click', () => {
+                          btnConfirm.addEventListener('click', (e) => {
+                            e.preventDefault()
                             const selections = StorageLocal.getAllArray('selections')
+                            console.log('Confirmar Horario clickeado. Selecciones encontradas:', selections.length)
                             renderConfirmedSchedule(selections)
                           })
                         }
                       })()
+
+                      // --- Gráfica de Calificaciones ---
+                      function renderGradesChart() {
+                        const canvas = document.getElementById('gradesChart')
+                        const placeholder = document.getElementById('gradesPlaceholder')
+                        if (!canvas || !placeholder) return
+                        const selections = StorageLocal.getAllArray('selections') || []
+                        // buscar calificaciones numéricas dentro de las selecciones (campo 'grade')
+                        const graded = selections.filter(s => typeof s.grade === 'number')
+
+                        // Si Chart no está cargado, mostrar placeholder y limpiar canvas sin lanzar error
+                        const ctx = canvas.getContext('2d')
+                        if (!Chart) {
+                          placeholder.style.display = 'block'
+                          if (window._gradesChart) { window._gradesChart.destroy(); window._gradesChart = null }
+                          ctx.clearRect(0, 0, canvas.width, canvas.height)
+                          return
+                        }
+
+                        if (!graded.length) {
+                          placeholder.style.display = 'block'
+                          if (window._gradesChart) { window._gradesChart.destroy(); window._gradesChart = null }
+                          ctx.clearRect(0, 0, canvas.width, canvas.height)
+                          return
+                        }
+                        placeholder.style.display = 'none'
+                        const labels = graded.map(s => s.subject)
+                        const data = graded.map(s => s.grade)
+                        if (window._gradesChart) window._gradesChart.destroy()
+                        window._gradesChart = new Chart(ctx, {
+                          type: 'bar',
+                          data: {
+                            labels,
+                            datasets: [{ label: 'Calificación', data, backgroundColor: 'rgba(54,162,235,0.6)' }]
+                          },
+                          options: { scales: { y: { beginAtZero: true, max: 100 } } }
+                        })
+                      }
 
                       function renderConfirmedSchedule(selections) {
                         let el = document.getElementById('confirmedSchedule')
@@ -491,25 +581,100 @@
                           el = document.createElement('div')
                           el.id = 'confirmedSchedule'
                           el.style.position = 'fixed'
-                          el.style.left = '0'
-                          el.style.right = '0'
-                          el.style.bottom = '0'
+                          el.style.left = '50%'
+                          el.style.transform = 'translateX(-50%)'
+                          el.style.bottom = '2rem'
+                          el.style.width = '94%'
+                          el.style.maxWidth = '720px'
                           el.style.background = '#fff'
-                          el.style.borderTop = '1px solid #ccc'
-                          el.style.padding = '1rem'
-                          el.style.zIndex = '1000'
-                          el.style.boxShadow = '0 -2px 8px rgba(0,0,0,0.08)'
+                          el.style.borderRadius = '10px'
+                          el.style.padding = '1.25rem'
+                          el.style.zIndex = '10000'
+                          el.style.boxShadow = '0 8px 30px rgba(0,0,0,0.18)'
                           document.body.appendChild(el)
                         }
-                        if (!selections || !selections.length) {
-                          el.innerHTML = '<strong>Horario confirmado:</strong> (sin selecciones) <button id="closeConfirmed">Cerrar</button>'
-                        } else {
-                          const lines = selections.map(s => `${s.subject} — ${s.teacherName} (${s.start}-${s.end})`)
-                          el.innerHTML = `<strong>Horario confirmado:</strong><ul>${lines.map(l => `<li>${l}</li>`).join('')}</ul><button id="closeConfirmed">Cerrar</button>`
+
+                        // Agrupar materias por día
+                        const scheduleByDay = {
+                          'Lunes': [], 'Martes': [], 'Miércoles': [], 'Jueves': [], 'Viernes': []
                         }
+
+                        if (selections && selections.length) {
+                          selections.forEach(s => {
+                            if (scheduleByDay[s.day]) scheduleByDay[s.day].push(s)
+                          })
+                          // Ordenar por hora de inicio
+                          Object.values(scheduleByDay).forEach(day => day.sort((a, b) => a.start.localeCompare(b.start)))
+                        }
+
+                        // Cabecera con título, contador y acciones
+                        let content = `
+                          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                            <div>
+                              <h3 style="margin:0;color:var(--pantone);font-size:1.15rem">Horario confirmado</h3>
+                              <div style="font-size:0.85rem;color:#666;margin-top:4px">${selections && selections.length ? selections.length + ' materia(s) seleccionada(s)' : 'Sin selecciones'}</div>
+                            </div>
+                            <div style="display:flex;gap:8px;align-items:center">
+                              <button id="downloadConfirmed" style="background:var(--pantone);color:#fff;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;font-size:0.9rem">Descargar CSV</button>
+                              <button id="closeConfirmed" aria-label="Cerrar" style="background:#f3f4f6;border:none;padding:8px;border-radius:6px;cursor:pointer">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                              </button>
+                            </div>
+                          </div>
+                        `
+
+                        if (!selections || !selections.length) {
+                          content += '<p style="text-align:center;color:#666;margin:18px 0">No hay materias seleccionadas</p>'
+                        } else {
+                          content += '<div style="max-height:420px;overflow-y:auto;padding-right:6px">'
+                          Object.entries(scheduleByDay).forEach(([day, classes]) => {
+                            if (classes.length) {
+                              content += `<div style="margin-bottom:12px">
+                                <h4 style="margin:0 0 6px 0;color:#333;font-size:0.98rem">${day}</h4>
+                                <ul style="list-style:none;margin:0;padding:0">${classes.map(s => `
+                                  <li style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px;background:#fbfbfb;border:1px solid #f0f0f0;border-radius:6px;margin-bottom:8px">
+                                    <div>
+                                      <div style="font-weight:600;color:#111">${s.subject}</div>
+                                      <div style="color:#666;font-size:0.88rem;margin-top:3px">${s.teacherName}</div>
+                                    </div>
+                                    <div style="text-align:right;color:#444;font-size:0.9rem">
+                                      <div style="font-weight:600">${s.start} - ${s.end}</div>
+                                    </div>
+                                  </li>
+                                `).join('')}</ul>
+                              </div>`
+                            }
+                          })
+                          content += '</div>'
+                        }
+
+                        el.innerHTML = content
+
+                        // Eventos: cerrar y descargar CSV
                         const closeBtn = document.getElementById('closeConfirmed')
-                        if (closeBtn) {
-                          closeBtn.addEventListener('click', () => el.remove())
+                        if (closeBtn) closeBtn.addEventListener('click', () => el.remove())
+
+                        const downloadBtn = document.getElementById('downloadConfirmed')
+                        if (downloadBtn) {
+                          downloadBtn.addEventListener('click', () => {
+                            if (!selections || !selections.length) {
+                              alert('No hay selecciones para exportar.')
+                              return
+                            }
+                            // Generar CSV
+                            const headers = ['Materia','Profesor','Día','Inicio','Fin']
+                            const rows = selections.map(s => [s.subject, s.teacherName, s.day, s.start, s.end])
+                            const csv = [headers, ...rows].map(r => r.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n')
+                            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+                            const url = URL.createObjectURL(blob)
+                            const a = document.createElement('a')
+                            a.href = url
+                            a.download = 'horario_confirmado.csv'
+                            document.body.appendChild(a)
+                            a.click()
+                            a.remove()
+                            URL.revokeObjectURL(url)
+                          })
                         }
                       }
                     </script>
