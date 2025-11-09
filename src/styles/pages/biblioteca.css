@@ -1,0 +1,119 @@
+/* --- Estilos para la Sección de Biblioteca --- */
+
+/* Estilos para la navegación de pestañas */
+.biblioteca-nav {
+  display: flex;
+  border-bottom: 2px solid #ddd;
+  margin-top: 1.5rem;
+}
+
+.biblioteca-tab-btn {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: -2px; /* Alinea con el borde inferior */
+}
+
+.biblioteca-tab-btn.active {
+  color: var(--pantone, #002347);
+  font-weight: bold;
+  border-bottom-color: var(--pantone, #002347);
+}
+
+/* Contenedores de pestañas */
+.biblioteca-pane {
+  display: none; /* Ocultos por defecto */
+  padding-top: 1.5rem;
+}
+
+.biblioteca-pane.active {
+  display: block; /* Visible */
+}
+
+/* Estilos para la barra de búsqueda */
+.search-bar-biblioteca {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+#biblioteca-search-input {
+  flex-grow: 1; /* Ocupa el espacio */
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilos para los resultados de búsqueda */
+.libro-resultado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #fcfcfc;
+  margin-bottom: 1rem;
+}
+
+.libro-resultado div {
+  line-height: 1.5;
+}
+
+.libro-resultado .titulo {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+.libro-resultado .autor {
+  font-style: italic;
+  color: #555;
+}
+.libro-resultado .disponible {
+  color: #28a745; /* Verde */
+  font-weight: bold;
+}
+.libro-resultado .no-disponible {
+  color: #dc3545; /* Rojo */
+  font-weight: bold;
+}
+
+.btn-solicitar {
+  padding: 8px 15px;
+}
+
+/* Estilos para las tablas de préstamos */
+.tabla-prestamos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.tabla-prestamos th,
+.tabla-prestamos td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.tabla-prestamos thead {
+  background-color: #f2f2f2;
+}
+
+.btn-renovar {
+  padding: 5px 10px;
+  background-color: #ffc107; /* Amarillo */
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-renovar:hover {
+  background-color: #e0a800;
+}

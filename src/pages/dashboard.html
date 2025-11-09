@@ -3,9 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/public/favicon.webp" type="image/x-icon" />
     <link rel="stylesheet" href="/src/styles/global.css" />
     <link rel="stylesheet" href="/src/styles/pages/dashboard.css" />
     <link rel="stylesheet" href="/src/styles/components/navbar.css" />
+    <link rel="stylesheet" href="/src/styles/pages/horario.css" />
+    <link rel="stylesheet" href="/src/styles/pages/inscripciones.css" />
+    <link rel="stylesheet" href="/src/styles/pages/biblioteca.css" />
     <title>Dashboard | SGA</title>
   </head>
   <body>
@@ -35,6 +39,11 @@
             <li>
               <a href="#" class="nav-link" data-target="evaluacion"
                 >Evaluación Docente</a
+              >
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-target="biblioteca"
+                >Biblioteca</a
               >
             </li>
           </ul>
@@ -124,99 +133,71 @@
             <div class="content-grid">
               <div class="content-block">
                 <h2>Datos Generales</h2>
-                <form>
-                  <div class="form-group">
-                    <label for="nombre" style="margin-top: 1rem"
-                      >Nombre Completo</label
-                    >
-                    <input
-                      type="text"
-                      id="nombre"
-                      value="Andy Espino Cabrales"
-                      readonly />
-                  </div>
-                  <div class="form-group">
-                    <label for="matricula" style="margin-top: 1rem"
-                      >Matrícula</label
-                    >
-                    <input
-                      type="text"
-                      id="matricula"
-                      value="21550346"
-                      readonly />
-                  </div>
-                  <div class="form-group" style="margin-top: 1rem">
-                    <label for="carrera">Carrera</label>
-                    <input
-                      type="text"
-                      id="carrera"
-                      value="Ingeniería en Sistemas Computacionales"
-                      readonly />
-                  </div>
-                </form>
+                <p style="margin-top: 1rem">
+                  Revisa y actualiza tu información personal.
+                </p>
+                <button
+                  id="informacion-escolar"
+                  class="btn-primary"
+                  style="
+                    margin-top: 1rem;
+                    background-color: var(--pantone);
+                    width: 400px;
+                  "
+                  data-target="datos-generales">
+                  Consultar datos generales
+                </button>
               </div>
+
               <div class="content-block">
                 <h2>Datos Socioeconómicos</h2>
                 <p style="margin-top: 1rem">
-                  Información sobre becas, apoyos y situación económica.
+                  Información sobre becas y apoyos económicos.
                 </p>
                 <button
-                  id="información"
+                  id="informacion-socioeconomica"
                   class="btn-primary"
-                  style="margin-top: 1rem; background-color: var(--pantone)">
-                  Información
+                  style="
+                    margin-top: 1rem;
+                    background-color: var(--pantone);
+                    width: 400px;
+                  ">
+                  Consultar información socioeconómica
                 </button>
               </div>
-              <div>
-                <h2>Horario de Materias</h2>
-                <table style="width: 100%">
-                  <thead>
-                    <tr>
-                      <th style="margin-left: 1rem">Lunes</th>
-                      <th style="margin-left: 1rem">Martes</th>
-                      <th style="margin-left: 1rem">Miercoles</th>
-                      <th style="margin-left: 1rem">Jueves</th>
-                      <th style="margin-left: 1rem">Viernes</th>
-                    </tr>
-                  </thead>
-                  <tbody style="gap: 1rem">
-                    <tr>
-                      <td>10:00-11:00 Administración de Base de Datos</td>
-                      <td>10:00-11:00 Administración de Base de Datos</td>
-                      <td>10:00-11:00 Administración de Base de Datos</td>
-                      <td>10:00-11:00 Administración de Base de Datos</td>
-                      <td>10:00-11:00 Administración de Base de Datos</td>
-                    </tr>
-                    <tr>
-                      <td>13:00-14:00 Taller de Sistemas Operativos</td>
-                      <td>13:00-14:00 Taller de Sistemas Operativos</td>
-                      <td>13:00-14:00 Taller de Sistemas Operativos</td>
-                      <td>13:00-14:00 Taller de Sistemas Operativos</td>
-                      <td>13:00-14:00 Taller de Sistemas Operativos</td>
-                    </tr>
-                    <tr>
-                      <td>14:00-15:00 Programación Frontend</td>
-                      <td>14:00-15:00 Programación Frontend</td>
-                      <td>14:00-15:00 Programación Frontend</td>
-                      <td>14:00-15:00 Programación Frontend</td>
-                      <td>14:00-15:00 Programación Frontend</td>
-                    </tr>
-                    <tr>
-                      <td>15:00-16:00 Ingeniería de Software</td>
-                      <td>15:00-16:00 Ingeniería de Software</td>
-                      <td>15:00-16:00 Ingeniería de Software</td>
-                      <td>15:00-16:00 Ingeniería de Software</td>
-                      <td>15:00-16:00 Ingeniería de Software</td>
-                    </tr>
-                    <tr>
-                      <td>17:00-18:00 Arquitectura de Computadoras</td>
-                      <td>17:00-18:00 Arquitectura de Computadoras</td>
-                      <td>17:00-18:00 Arquitectura de Computadoras</td>
-                      <td>17:00-18:00 Arquitectura de Computadoras</td>
-                      <td>17:00-18:00 Arquitectura de Computadoras</td>
-                    </tr>
-                  </tbody>
-                </table>
+
+              <div class="content-block">
+                <h2>Consulta de calificaciones</h2>
+                <p style="margin-top: 1rem">
+                  Consulta tus calificaciones pasadas y actuales.
+                </p>
+                <button
+                  id="informacion-calificaciones"
+                  class="btn-primary"
+                  style="
+                    margin-top: 1rem;
+                    background-color: var(--pantone);
+                    width: 400px;
+                  "
+                  data-target="calificaciones">
+                  Consultar calificaciones
+                </button>
+              </div>
+
+              <div class="content-block">
+                <h2>Horario</h2>
+                <p style="margin-top: 1rem">Consulta tu horario de clases.</p>
+                <button
+                  id="informacion-calificaciones"
+                  class="btn-primary"
+                  style="
+                    margin-top: 1rem;
+                    background-color: var(--pantone);
+                    width: 400px;
+                  "
+                  data-target="horario">
+                  Consultar horario
+                </button>
               </div>
             </div>
           </section>
@@ -249,7 +230,10 @@
                 <p><strong>Horas Acreditadas:</strong> 0 / 480</p>
                 <button
                   class="btn-primary"
-                  style="background-color: var(--pantone); margin-top: 1rem">
+                  style="
+                    background-color: var(--cool-gray-pantone);
+                    margin-top: 1rem;
+                  ">
                   Registrar Horas
                 </button>
               </div>
@@ -270,84 +254,42 @@
         <!-- SECCIÓN: Inscripciones -->
         <div id="inscripciones" class="page-content">
           <section class="content-section">
-            <h1>Inscripciones</h1>
+            <h1>Inscripción de Materias</h1>
             <div class="content-block">
-              <h2>Selección de Materias</h2>
+              <h2>Periodo: ENE-JUN/2026</h2>
               <p>
-                El periodo de selección de materias para el próximo semestre aún
-                no se encuentra abierto, vuelve despúes.
+                Selecciona las materias que deseas cursar. Recuerda revisar que
+                no se empalmen los horarios.
               </p>
-              <form>
-                <div class="form-group" style="margin-top: 1rem">
-                  <label for="materia1">Materia 1</label>
-                  <select id="materia1" disabled>
-                    <option>Selecciona una materia...</option>
-                    <option>Cálculo Integral</option>
-                    <option>Programación Orientada a Objetos</option>
-                    <option>Estructura de Datos</option>
-                  </select>
+
+              <div class="inscripcion-container">
+                <div class="columna-disponibles">
+                  <h3>Materias Disponibles</h3>
+                  <ul id="lista-materias-disponibles">
+                    <li class="placeholder-seleccion">Cargando materias...</li>
+                  </ul>
                 </div>
-                <div class="form-group">
-                  <label for="materia2">Materia 2</label>
-                  <select id="materia2" disabled>
-                    <option>Selecciona una materia...</option>
-                    <option>Álgebra Lineal</option>
-                    <option>Redes de Computadoras</option>
-                    <option>Sistemas Operativos</option>
-                  </select>
+
+                <div class="columna-seleccionadas">
+                  <h3 id="titulo-seleccionadas">Tu Selección (0 Materias)</h3>
+                  <ul id="lista-materias-seleccionadas">
+                    <li class="placeholder-seleccion">
+                      Aún no has seleccionado materias.
+                    </li>
+                  </ul>
+                  <div class="total-actions">
+                    <button
+                      id="btn-guardar-seleccion"
+                      class="btn-primary"
+                      style="background-color: var(--pantone); padding: 0.5rem">
+                      Guardar Selección
+                    </button>
+                    <button id="btn-limpiar-seleccion" class="btn-logout">
+                      Limpiar Todo
+                    </button>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="materia2">Materia 2</label>
-                  <select id="materia2" disabled>
-                    <option>Selecciona una materia...</option>
-                    <option>Álgebra Lineal</option>
-                    <option>Redes de Computadoras</option>
-                    <option>Sistemas Operativos</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="materia2">Materia 3</label>
-                  <select id="materia2" disabled>
-                    <option>Selecciona una materia...</option>
-                    <option>Álgebra Lineal</option>
-                    <option>Redes de Computadoras</option>
-                    <option>Sistemas Operativos</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="materia2">Materia 4</label>
-                  <select id="materia2" disabled>
-                    <option>Selecciona una materia...</option>
-                    <option>Álgebra Lineal</option>
-                    <option>Redes de Computadoras</option>
-                    <option>Sistemas Operativos</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="materia2">Materia 5</label>
-                  <select id="materia2" disabled>
-                    <option>Selecciona una materia...</option>
-                    <option>Álgebra Lineal</option>
-                    <option>Redes de Computadoras</option>
-                    <option>Sistemas Operativos</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="materia2">Materia 6</label>
-                  <select id="materia2" disabled>
-                    <option>Selecciona una materia...</option>
-                    <option>Álgebra Lineal</option>
-                    <option>Redes de Computadoras</option>
-                    <option>Sistemas Operativos</option>
-                  </select>
-                </div>
-                <button type="submit" class="btn-primary">
-                  Enviar Selección
-                </button>
-              </form>
-              <button class="materia-success btn-logout" disabled>
-                Aceptar
-              </button>
+              </div>
             </div>
           </section>
         </div>
@@ -369,34 +311,574 @@
           </section>
         </div>
 
+        <!-- Biblioteca -->
+        <div id="biblioteca" class="page-content">
+          <section class="content-section">
+            <h1>Biblioteca Digital y Servicios</h1>
+
+            <nav class="biblioteca-nav">
+              <button
+                class="biblioteca-tab-btn active"
+                data-target="biblioteca-digital">
+                Acceso Digital
+              </button>
+              <button
+                class="biblioteca-tab-btn"
+                data-target="biblioteca-buscar">
+                Buscar en Catálogo
+              </button>
+              <button
+                class="biblioteca-tab-btn"
+                data-target="biblioteca-prestamos">
+                Mis Préstamos
+              </button>
+            </nav>
+
+            <div class="biblioteca-panes-container">
+              <div id="biblioteca-digital" class="biblioteca-pane active">
+                <h2>Recursos Digitales</h2>
+                <p>
+                  Accede a nuestras bases de datos, revistas científicas y
+                  libros electrónicos.
+                </p>
+                <div class="content-grid" style="margin-top: 1.5rem">
+                  <div class="content-block">
+                    <h3>Bases de Datos (IEEE, Scopus)</h3>
+                    <p>Acceso a artículos de investigación y journals.</p>
+                    <a
+                      href="#"
+                      target="_blank"
+                      class="btn-primary"
+                      style="margin-top: 1rem; text-decoration: none"
+                      >Acceder</a
+                    >
+                  </div>
+                  <div class="content-block">
+                    <h3>Catálogo de E-books</h3>
+                    <p>Consulta y descarga libros electrónicos.</p>
+                    <a
+                      href="#"
+                      target="_blank"
+                      class="btn-primary"
+                      style="margin-top: 1rem; text-decoration: none"
+                      >Explorar</a
+                    >
+                  </div>
+                  <div class="content-block">
+                    <h3>Repositorio Institucional</h3>
+                    <p>Tesis y proyectos de la institución.</p>
+                    <a
+                      href="#"
+                      target="_blank"
+                      class="btn-primary"
+                      style="margin-top: 1rem; text-decoration: none"
+                      >Consultar</a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div id="biblioteca-buscar" class="biblioteca-pane">
+                <h2>Buscar en Catálogo</h2>
+                <p>Busca por título, autor o ISBN.</p>
+                <form id="form-biblioteca-buscar">
+                  <div class="search-bar-biblioteca">
+                    <input
+                      type="text"
+                      id="biblioteca-search-input"
+                      placeholder="Ej: 'Cálculo de una variable'" />
+                    <button type="submit" class="btn-primary">Buscar</button>
+                  </div>
+                </form>
+                <div id="biblioteca-resultados" style="margin-top: 2rem">
+                  <p class="placeholder-seleccion">
+                    Los resultados de tu búsqueda aparecerán aquí.
+                  </p>
+                </div>
+              </div>
+
+              <div id="biblioteca-prestamos" class="biblioteca-pane">
+                <h2>Mis Préstamos y Control</h2>
+
+                <h3 style="margin-top: 2rem">Préstamos Activos</h3>
+                <table class="tabla-prestamos">
+                  <thead>
+                    <tr>
+                      <th>Título</th>
+                      <th>Fecha de Préstamo</th>
+                      <th>Fecha de Vencimiento</th>
+                      <th>Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-prestamos-actuales">
+                    <tr>
+                      <td>Ingeniería de Software (9na Ed.)</td>
+                      <td>01/11/2025</td>
+                      <td>08/11/2025</td>
+                      <td><button class="btn-renovar">Renovar</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <h3 style="margin-top: 2rem">Historial de Préstamos</h3>
+                <table class="tabla-prestamos">
+                  <thead>
+                    <tr>
+                      <th>Título</th>
+                      <th>Fecha de Préstamo</th>
+                      <th>Fecha de Devolución</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Redes de Computadoras (5ta Ed.)</td>
+                      <td>15/10/2025</td>
+                      <td>22/10/2025</td>
+                    </tr>
+                    <tr>
+                      <td>Sistemas Operativos Modernos</td>
+                      <td>01/10/2025</td>
+                      <td>08/10/2025</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sección datos generales -->
+        <div id="datos-generales" class="page-content">
+          <h1>Tus datos generales:</h1>
+          <section
+            class="content-section"
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem">
+            <div class="left-side">
+              <div class="content-block">
+                <h4>Nombre: <span style="font-weight: 400">Andy</span></h4>
+                <h4>
+                  Apellido paterno: <span style="font-weight: 400">Espino</span>
+                </h4>
+                <h4>
+                  Apellido materno:
+                  <span style="font-weight: 400">Cabrales</span>
+                </h4>
+                <h4>
+                  Número de control:
+                  <span style="font-weight: 400">21550346</span>
+                </h4>
+                <h4>
+                  Lugar de nacimiento:
+                  <span>
+                    <select name="lugar-nacimiento" id="lugar-nacimiento">
+                      <option value="Aguascalientes">Aguascalientes</option>
+                      <option value="Baja California">Baja California</option>
+                      <option value="Baja California Sur">
+                        Baja California Sur
+                      </option>
+                      <option value="Campeche">Campeche</option>
+                      <option value="Chiapas">Chiapas</option>
+                      <option value="Chihuahua" selected>Chihuahua</option>
+                      <option value="Ciudad de México">Ciudad de México</option>
+                      <option value="Coahuila">Coahuila</option>
+                      <option value="Colima">Colima</option>
+                      <option value="Durango">Durango</option>
+                      <option value="Guanajuato">Guanajuato</option>
+                      <option value="Guerrero">Guerrero</option>
+                      <option value="Hidalgo">Hidalgo</option>
+                      <option value="Jalisco">Jalisco</option>
+                      <option value="México">México</option>
+                      <option value="Michoacán">Michoacán</option>
+                      <option value="Morelos">Morelos</option>
+                      <option value="Nayarit">Nayarit</option>
+                      <option value="Nuevo León">Nuevo León</option>
+                      <option value="Oaxaca">Oaxaca</option>
+                      <option value="Puebla">Puebla</option>
+                      <option value="Querétaro">Querétaro</option>
+                      <option value="Quintana Roo">Quintana Roo</option>
+                      <option value="San Luis Potosí">San Luis Potosí</option>
+                      <option value="Sinaloa">Sinaloa</option>
+                      <option value="Sonora">Sonora</option>
+                      <option value="Tabasco">Tabasco</option>
+                      <option value="Tamaulipas">Tamaulipas</option>
+                      <option value="Tlaxcala">Tlaxcala</option>
+                      <option value="Veracruz">Veracruz</option>
+                      <option value="Yucatán">Yucatán</option>
+                      <option value="Zacatecas">Zacatecas</option>
+                    </select></span
+                  >
+                </h4>
+                <h4>
+                  Sexo:
+                  <span style="font-weight: 400">
+                    <select name="sexo" id="sexo">
+                      <option value="masculino" selected>Masculino</option>
+                      <option value="femenino">Femenino</option>
+                      <option value="otro">Otro</option>
+                    </select>
+                  </span>
+                </h4>
+                <h4>
+                  Estado civil:
+                  <span style="font-weight: 400">
+                    <select name="estado-civil" id="estado-civil">
+                      <option value="soltero" selected>Soltero</option>
+                      <option value="casado">Casado</option>
+                      <option value="divorciado">Divorciado</option>
+                      <option value="viudo">Viudo</option>
+                    </select>
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div class="right-side">
+              <h4>
+                Domicio actual (Calle):
+                <span style="font-weight: 400">
+                  <input
+                    type="text"
+                    name="domicilio-calle"
+                    id="domicilio-calle"
+                    value="Misión de Santa Bárbara" />
+                </span>
+              </h4>
+              <h4>
+                Número exterior:
+                <span style="font-weight: 400">
+                  <input
+                    type="number"
+                    name="domicilio-numero"
+                    id="domicilio-numero"
+                    value="1234" />
+                </span>
+              </h4>
+              <h4>
+                Colonia:
+                <span style="font-weight: 400">
+                  <input
+                    type="text"
+                    name="domicilio-colonia"
+                    id="domicilio-colonia"
+                    value="Riberas" />
+                </span>
+              </h4>
+              <h4>
+                Código postal:
+                <span style="font-weight: 400">
+                  <input
+                    type="number"
+                    name="domicilio-cp"
+                    id="domicilio-cp"
+                    value="56789" />
+                </span>
+              </h4>
+              <h4>
+                Ciudad:
+                <span style="font-weight: 400">
+                  <input
+                    type="text"
+                    name="domicilio-ciudad"
+                    id="domicilio-ciudad"
+                    value="Chihuahua" />
+                </span>
+              </h4>
+              <h4>
+                Estado:
+                <span style="font-weight: 400">
+                  <input
+                    type="text"
+                    name="domicilio-estado"
+                    id="domicilio-estado"
+                    value="Chihuahua" />
+                </span>
+              </h4>
+              <h4>
+                Teléfono:
+                <span style="font-weight: 400">
+                  <input
+                    type="text"
+                    name="telefono"
+                    id="telefono"
+                    value="614 123 4567" />
+                </span>
+              </h4>
+              <h4>
+                CURP:
+                <span style="font-weight: 400">
+                  <input
+                    type="text"
+                    name="curp"
+                    id="curp"
+                    value="EICA021007HCHSPN09" />
+                </span>
+              </h4>
+              <h4>
+                Correo eléctronico:
+                <span style="font-weight: 400">
+                  <input
+                    type="text"
+                    name="correo"
+                    id="userEmailDisplay"
+                    value="andycabrales07@gmail.com" />
+                </span>
+              </h4>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sección horario -->
+        <div id="horario" class="page-content">
+          <section class="content-section">
+            <h1>Horario:</h1>
+            <div class="content-block">
+              <div id="horario-container">
+                <table class="tabla-horario">
+                  <thead>
+                    <tr>
+                      <th>Materia</th>
+                      <th>Gpo</th>
+                      <th>CR</th>
+                      <th>Lunes</th>
+                      <th>Martes</th>
+                      <th>Miércoles</th>
+                      <th>Jueves</th>
+                      <th>Viernes</th>
+                      <th>Sábado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="clave-materia">FS1</div>
+                        <div class="nombre-materia">PROG. FRONT END</div>
+                      </td>
+                      <td>A</td>
+                      <td>5</td>
+                      <td>14:00-15:00<br />Aula:S4</td>
+                      <td>14:00-15:00<br />Aula:S4</td>
+                      <td>14:00-15:00<br />Aula:S4</td>
+                      <td>14:00-15:00<br />Aula:S4</td>
+                      <td>14:00-15:00<br />Aula:S4</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="clave-materia">4P6</div>
+                        <div class="nombre-materia">ADMÓN. BASE DATOS</div>
+                      </td>
+                      <td>A</td>
+                      <td>5</td>
+                      <td>10:00-11:00<br />Aula:F5</td>
+                      <td>10:00-11:00<br />Aula:F5</td>
+                      <td>10:00-11:00<br />Aula:F5</td>
+                      <td>10:00-11:00<br />Aula:F5</td>
+                      <td>10:00-11:00<br />Aula:F5</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="clave-materia">5P6</div>
+                        <div class="nombre-materia">INGENIERÍA DE SOFTWARE</div>
+                      </td>
+                      <td>B</td>
+                      <td>5</td>
+                      <td>15:00-16:00<br />Aula:D4</td>
+                      <td>15:00-16:00<br />Aula:D4</td>
+                      <td>15:00-16:00<br />Aula:D4</td>
+                      <td>15:00-16:00<br />Aula:D4</td>
+                      <td>15:00-16:00<br />Aula:D4</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="clave-materia">5P5</div>
+                        <div class="nombre-materia">
+                          LENGUAJES Y AUTÓMATAS II
+                        </div>
+                      </td>
+                      <td>B</td>
+                      <td>5</td>
+                      <td>18:00-19:00<br />Aula:D4</td>
+                      <td>18:00-19:00<br />Aula:D4</td>
+                      <td>18:00-19:00<br />Aula:D4</td>
+                      <td>18:00-19:00<br />Aula:D4</td>
+                      <td>18:00-19:00<br />Aula:D4</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="clave-materia">2P6</div>
+                        <div class="nombre-materia">REDES DE COMPUTADORAS</div>
+                      </td>
+                      <td>B</td>
+                      <td>5</td>
+                      <td>19:00-20:00<br />Aula:S5</td>
+                      <td>19:00-20:00<br />Aula:S5</td>
+                      <td>19:00-20:00<br />Aula:S5</td>
+                      <td>19:00-20:00<br />Aula:S5</td>
+                      <td>19:00-20:00<br />Aula:S5</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="clave-materia">6P5</div>
+                        <div class="nombre-materia">ARQ. DE COMPUT.</div>
+                      </td>
+                      <td>C</td>
+                      <td>5</td>
+                      <td>17:00-18:00<br />Aula:D1</td>
+                      <td>17:00-18:00<br />Aula:D1</td>
+                      <td>17:00-18:00<br />Aula:E1</td>
+                      <td>17:00-18:00<br />Aula:E1</td>
+                      <td>17:00-18:00<br />Aula:E1</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="clave-materia">1P7</div>
+                        <div class="nombre-materia">TALLER SIST. OPER.</div>
+                      </td>
+                      <td>B</td>
+                      <td>4</td>
+                      <td>13:00-14:00<br />Aula:S2</td>
+                      <td>13:00-14:00<br />Aula:S2</td>
+                      <td>13:00-14:00<br />Aula:D5</td>
+                      <td>13:00-14:00<br />Aula:D5</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <button class="print-button" onclick="window.print()">
+                Imprimir o Guardar como PDF
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sección calificaciones -->
+        <div id="calificaciones" class="page-content">
+          <section class="content-section">
+            <h1>Consulta de boletas</h1>
+            <div class="content-block">
+              <h3>No. de Control</h3>
+              <p>21550346</p>
+              <h3>Periodo</h3>
+              <select name="periodo" id="periodo">
+                <option value="" selected>AGO-DIC/2025</option>
+              </select>
+              <button>Consultar</button>
+            </div>
+          </section>
+        </div>
+
         <!-- Sección inglés -->
         <div id="ingles" class="page-content">
           <section class="content-section">
-            <h1>Próximas Fechas de Exámenes de Inglés</h1>
-            <div class="content-block">
-              <h2>Fechas Disponibles:</h2>
-              <p>
-                Actualmente no hay fechas disponibles, vuelva en otro momento.
-              </p>
-              <p style="margin-top: 1rem">
-                Siga atento a nuestras redes sociales.
-              </p>
-            </div>
+            <section class="content-section">
+              <h1>Próximas Fechas de Exámenes de Inglés</h1>
+
+              <div class="content-block">
+                <h2 style="margin-top: 1rem">Tu Estado Actual</h2>
+                <p>
+                  Nivel de Inglés Acreditado:
+                  <strong style="font-size: 1.1rem; color: var(--pantone)"
+                    >B2</strong
+                  >
+                </p>
+                <p style="margin-top: 0.5rem">
+                  Recuerda que el nivel mínimo requerido para el proceso de
+                  titulación es <strong>B1</strong>.
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.9rem">
+                  Si deseas mejorar tu acreditación o este dato es incorrecto,
+                  mantente atento a las próximas convocatorias.
+                </p>
+              </div>
+
+              <div class="content-block" style="margin-top: 2rem">
+                <h2 style="margin-top: 1rem">Fechas Disponibles</h2>
+                <div class="message-box">
+                  <p>
+                    Actualmente no hay fechas disponibles para exámenes de
+                    acreditación.
+                  </p>
+                </div>
+              </div>
+            </section>
           </section>
         </div>
 
         <!-- Sección credencial -->
         <div id="credencial" class="page-content">
           <section class="content-section">
-            <h1>Solicitud de Reposición de Credencial Escolar</h1>
-            <div class="content-block">
-              <h2 style="margin-top: 1rem">Instrucciones:</h2>
-              <p style="margin-top: 1rem">
-                Para solicitar la reposición de tu credencial escolar, por favor
-                acude a la oficina de servicios escolares con una copia de tu
-                identificación oficial y una fotografía reciente.
-              </p>
-            </div>
+            <section class="content-section">
+              <h1>Solicitud de Reposición de Credencial Escolar</h1>
+
+              <div class="content-block">
+                <h2 style="margin-top: 1rem">Instrucciones:</h2>
+                <p style="margin-top: 1rem">
+                  Para solicitar la reposición de tu credencial escolar, por
+                  favor sigue los siguientes pasos:
+                </p>
+
+                <h3 style="margin-top: 2rem">1. Realizar el Pago</h3>
+                <p><strong>Costo de Reposición:</strong> $150.00 MXN</p>
+                <p style="margin-bottom: 1rem">
+                  Realiza el pago correspondiente en la caja de la institución o
+                  descarga el formato para pagar en el banco.
+                </p>
+                <a
+                  href="/docs/formato_pago_credencial.pdf"
+                  download="Formato_Pago_Credencial.pdf"
+                  class="btn-primary"
+                  style="
+                    background-color: var(--pantone);
+                    margin-top: 1rem;
+                    text-decoration: none;
+                  ">
+                  Descargar Formato de Pago
+                </a>
+
+                <h3 style="margin-top: 2rem">2. Presentar Documentos</h3>
+                <p>
+                  Acude a la oficina de servicios escolares con los siguientes
+                  documentos:
+                </p>
+                <ul
+                  style="margin-top: 1rem; margin-left: 20px; line-height: 1.6">
+                  <li>Comprobante de pago (original y copia).</li>
+                  <li>
+                    Una copia de tu identificación oficial (INE, pasaporte).
+                  </li>
+                  <li>
+                    Una fotografía reciente tamaño infantil (a color o b/n,
+                    fondo blanco).
+                  </li>
+                </ul>
+
+                <h3 style="margin-top: 2rem">Ubicación y Horario</h3>
+                <div style="margin-top: 1rem">
+                  <p>
+                    <strong>Oficina:</strong> Ventanilla de Servicios Escolares
+                    (Edificio Administrativo, planta baja).
+                  </p>
+                  <p>
+                    <strong>Horario de atención:</strong> Lunes a Viernes de
+                    9:00 AM a 3:00 PM.
+                  </p>
+                </div>
+
+                <h3 style="margin-top: 2rem">Tiempo de Entrega</h3>
+                <p>
+                  La nueva credencial estará lista en un plazo de
+                  <strong>3 a 5 días hábiles</strong>. Se te notificará por
+                  correo electrónico cuando puedas pasar a recogerla.
+                </p>
+              </div>
+            </section>
           </section>
         </div>
       </div>
@@ -416,130 +898,101 @@
     <script type="module">
       import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
 
-      // Configuración de Supabase
       const SUPABASE_URL = "https://uznqokybucscboikanfc.supabase.co"
-      const SUPABASE_ANON_KEY = "sb_publishable_ImmUkkSBODuqU7UP7hOfnA_Q7sU21tG"
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6bnFva3lidWNzY2JvaWthbmZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIwNDIzNzAsImV4cCI6MjA3NzYxODM3MH0.L1di6LqteqMG8LCR-Utaqq1k9c5v-pNiBDbEt9SE5uc"
 
       const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-      // --- Lógica de la SPA ---
+      console.log("📚 Dashboard ALUMNO cargando...")
 
-      const navLinks = document.querySelectorAll(".nav-link")
-      const contentPages = document.querySelectorAll(".page-content")
+      // Verificar auth UNA VEZ
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
 
-      function showPage(targetId) {
-        // Ocultar todas las páginas
-        contentPages.forEach((page) => {
-          page.classList.remove("active-page")
-        })
-
-        // Quitar 'active' de todos los enlaces
-        navLinks.forEach((link) => {
-          link.classList.remove("active")
-        })
-
-        // Mostrar la página seleccionada
-        const targetPage = document.getElementById(targetId)
-        if (targetPage) {
-          targetPage.classList.add("active-page")
-        }
-
-        // Marcar el enlace de nav como activo
-        const activeLink = document.querySelector(
-          `.nav-link[data-target="${targetId}"]`
-        )
-        if (activeLink) {
-          activeLink.classList.add("active")
-        }
+      if (!session) {
+        console.log("❌ Sin sesión")
+        window.location.replace("/index.html")
+        throw new Error("No auth")
       }
 
-      // Agregar event listeners a los enlaces de navegación
-      navLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
-          event.preventDefault() // Prevenir recarga de página
-          const targetId = link.getAttribute("data-target")
-          showPage(targetId)
-        })
-      })
+      console.log("✅ Sesión:", session.user.email)
 
-      // Agregar event listeners a los botones de trámites (Inglés y Credencial)
-      document.querySelectorAll("button[data-target]").forEach((btn) => {
-        btn.addEventListener("click", function (e) {
+      // Verificar rol
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("rol")
+        .eq("id", session.user.id)
+        .single()
+
+      if (profile?.rol === "maestro") {
+        console.log("⚠️ Es maestro, redirigiendo")
+        window.location.replace("/src/pages/dashboard-tutor.html")
+        throw new Error("Wrong dashboard")
+      }
+
+      // Actualizar UI
+      document.getElementById("userEmail").textContent = session.user.email
+      const display = document.getElementById("userEmailDisplay")
+      if (display) display.textContent = session.user.email
+      const input = document.querySelector('input[name="correo"]')
+      if (input) input.value = session.user.email
+      const loginTime = document.getElementById("loginTime")
+      if (loginTime && session.user.last_sign_in_at) {
+        loginTime.textContent = new Date(
+          session.user.last_sign_in_at
+        ).toLocaleString("es-MX")
+      }
+
+      // Logout
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", async (e) => {
           e.preventDefault()
-          const targetId = btn.getAttribute("data-target")
-          showPage(targetId)
+          await supabase.auth.signOut()
+          window.location.replace("/index.html")
+        })
+
+      // SPA
+      const navLinks = document.querySelectorAll(".nav-link")
+      const pages = document.querySelectorAll(".page-content")
+
+      function showPage(id) {
+        pages.forEach((p) => p.classList.remove("active-page"))
+        navLinks.forEach((l) => l.classList.remove("active"))
+        const page = document.getElementById(id)
+        if (page) page.classList.add("active-page")
+        const link = document.querySelector(`.nav-link[data-target="${id}"]`)
+        if (link) link.classList.add("active")
+      }
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault()
+          showPage(link.getAttribute("data-target"))
         })
       })
 
-      // --- Lógica de Autenticación (Existente) ---
-
-      // Verificar autenticación
-      async function checkAuth() {
-        const {
-          data: { user },
-          error,
-        } = await supabase.auth.getUser()
-
-        if (error || !user) {
-          // No hay usuario autenticado, redirigir al login
-          window.location.href = "/index.html"
-          return
-        }
-
-        // Usuario autenticado, mostrar información
-        document.getElementById("userEmail").textContent = user.email
-        document.getElementById("userEmailDisplay").textContent = user.email
-
-        // Mostrar fecha de último acceso
-        if (user.last_sign_in_at) {
-          const lastLogin = new Date(user.last_sign_in_at)
-          document.getElementById("loginTime").textContent =
-            lastLogin.toLocaleString("es-MX")
-        }
-      }
-
-      // Función para cerrar sesión
-      async function logout() {
-        // Se elimina el 'confirm()' para evitar bloquear la UI en iframes
-        // const confirmLogout = confirm("¿Estás seguro que deseas cerrar sesión?")
-        // if (confirmLogout) { ... }
-
-        const { error } = await supabase.auth.signOut()
-
-        if (error) {
-          // Se reemplaza 'alert()' con 'console.error()'
-          console.error("Error al cerrar sesión:", error.message)
-        } else {
-          // Redirigir al inicio
-          window.location.href = "/index.html"
-        }
-      }
-
-      // Event listeners
-      document.getElementById("logoutBtn").addEventListener("click", logout)
-
-      // Verificar autenticación al cargar
-      checkAuth()
-
-      // Listener para cambios de autenticación
-      supabase.auth.onAuthStateChange((event, session) => {
-        if (event === "SIGNED_OUT") {
-          window.location.href = "/index.html"
-        }
+      document.querySelectorAll("button[data-target]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault()
+          showPage(btn.getAttribute("data-target"))
+        })
       })
 
-      const informacion = document.getElementById("información")
-      informacion.addEventListener("click", () => {
-        const userConfirmed = confirm(
-          "¿Deseas ver la información socioeconómica?"
-        )
-        if (userConfirmed) {
-          // Redirigir a la página de información socioeconómica
-          window.location.href = "https://www.becabenitojuarez.gob.mx/"
-        } else {
-          console.log("El usuario canceló la acción.")
-        }
-      })
+      const info = document.getElementById("informacion-socioeconomica")
+      if (info) {
+        info.addEventListener("click", () => {
+          if (confirm("¿Ver información socioeconómica?")) {
+            window.location.href = "https://www.becabenitojuarez.gob.mx/"
+          }
+        })
+      }
+
+      console.log("✅ Dashboard ALUMNO listo")
     </script>
+    <script src="/src/scripts/inscripciones.js"></script>
+    <script type="module" src="/src/scripts/biblioteca.js"></script>
   </body>
 </html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horario de Clases</title>
+    <style>
+      /* Estilos generales */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 20px;
+      }
+
+      /* Contenedor principal del horario */
+      #horario-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden; /* Para que el border-radius afecte a la tabla */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Estilos de la tabla */
+      .tabla-horario {
+        width: 100%;
+        border-collapse: collapse; /* Bordes de tabla unidos */
+      }
+
+      /* Estilos de las celdas (encabezado y datos) */
+      .tabla-horario th,
+      .tabla-horario td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+
+      /* Encabezado de la tabla (azul oscuro) */
+      .tabla-horario thead th {
+        background-color: #002347; /* Un azul oscuro similar al de la imagen */
+        color: white;
+        padding: 12px 8px;
+        font-size: 0.8rem;
+        text-transform: uppercase; /* Mayúsculas */
+        letter-spacing: 0.5px;
+      }
+
+      /* Columna de Materia, alineada a la izquierda */
+      .tabla-horario td:first-child,
+      .tabla-horario th:first-child {
+        text-align: left;
+        padding-left: 15px;
+        font-size: 0.85rem;
+      }
+
+      /* Texto más pequeño para las claves de materia */
+      .tabla-horario td .clave-materia {
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: #333;
+      }
+
+      .tabla-horario td .nombre-materia {
+        font-size: 0.85rem;
+        color: #555;
+      }
+
+      /* Estilos para el botón de imprimir */
+      .print-button {
+        display: block; /* Que ocupe su propia línea */
+        margin: 25px auto; /* Centrado y con espacio */
+        padding: 12px 25px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background-color: #007bff; /* Azul estándar */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .print-button:hover {
+        background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+      }
+
+      /* --- Estilos de Impresión --- */
+      @media print {
+        /* Ocultar elementos que no queremos imprimir */
+        .print-button,
+        body > h2 {
+          display: none;
+        }
+
+        /* Quitar fondo y márgenes del body */
+        body {
+          background-color: #ffffff;
+          margin: 0;
+          padding: 0;
+        }
+
+        /* Asegurar que el contenedor del horario ocupe el ancho */
+        #horario-container {
+          box-shadow: none;
+          border-radius: 0;
+          width: 100%;
+          max-width: 100%;
+          margin: 0;
+          padding: 0;
+        }
+
+        /* Forzar que la tabla use colores de fondo (si el navegador lo permite) */
+        .tabla-horario thead th {
+          background-color: #002347 !important;
+          color: white !important;
+          -webkit-print-color-adjust: exact; /* Para Chrome/Safari */
+          color-adjust: exact; /* Estándar */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h2 style="text-align: center">Mi Horario de Clases</h2>
+
+    <div id="horario-container">
+      <table class="tabla-horario">
+        <thead>
+          <tr>
+            <th>Materia</th>
+            <th>Gpo</th>
+            <th>CR</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miércoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+            <th>Sábado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="clave-materia">FS1</div>
+              <div class="nombre-materia">PROG. FRONT END</div>
+            </td>
+            <td>A</td>
+            <td>5</td>
+            <td>14:00-15:00<br />Aula:S4</td>
+            <td>14:00-15:00<br />Aula:S4</td>
+            <td>14:00-15:00<br />Aula:S4</td>
+            <td>14:00-15:00<br />Aula:S4</td>
+            <td>14:00-15:00<br />Aula:S4</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="clave-materia">4P6</div>
+              <div class="nombre-materia">ADMÓN. BASE DATOS</div>
+            </td>
+            <td>A</td>
+            <td>5</td>
+            <td>10:00-11:00<br />Aula:F5</td>
+            <td>10:00-11:00<br />Aula:F5</td>
+            <td>10:00-11:00<br />Aula:F5</td>
+            <td>10:00-11:00<br />Aula:F5</td>
+            <td>10:00-11:00<br />Aula:F5</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="clave-materia">5P6</div>
+              <div class="nombre-materia">INGENIERÍA DE SOFTWARE</div>
+            </td>
+            <td>B</td>
+            <td>5</td>
+            <td>15:00-16:00<br />Aula:D4</td>
+            <td>15:00-16:00<br />Aula:D4</td>
+            <td>15:00-16:00<br />Aula:D4</td>
+            <td>15:00-16:00<br />Aula:D4</td>
+            <td>15:00-16:00<br />Aula:D4</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="clave-materia">5P5</div>
+              <div class="nombre-materia">LENGUAJES Y AUTÓMATAS II</div>
+            </td>
+            <td>B</td>
+            <td>5</td>
+            <td>18:00-19:00<br />Aula:D4</td>
+            <td>18:00-19:00<br />Aula:D4</td>
+            <td>18:00-19:00<br />Aula:D4</td>
+            <td>18:00-19:00<br />Aula:D4</td>
+            <td>18:00-19:00<br />Aula:D4</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="clave-materia">2P6</div>
+              <div class="nombre-materia">REDES DE COMPUTADORAS</div>
+            </td>
+            <td>B</td>
+            <td>5</td>
+            <td>19:00-20:00<br />Aula:S5</td>
+            <td>19:00-20:00<br />Aula:S5</td>
+            <td>19:00-20:00<br />Aula:S5</td>
+            <td>19:00-20:00<br />Aula:S5</td>
+            <td>19:00-20:00<br />Aula:S5</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="clave-materia">6P5</div>
+              <div class="nombre-materia">ARQ. DE COMPUT.</div>
+            </td>
+            <td>C</td>
+            <td>5</td>
+            <td>17:00-18:00<br />Aula:D1</td>
+            <td>17:00-18:00<br />Aula:D1</td>
+            <td>17:00-18:00<br />Aula:E1</td>
+            <td>17:00-18:00<br />Aula:E1</td>
+            <td>17:00-18:00<br />Aula:E1</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="clave-materia">1P7</div>
+              <div class="nombre-materia">TALLER SIST. OPER.</div>
+            </td>
+            <td>B</td>
+            <td>4</td>
+            <td>13:00-14:00<br />Aula:S2</td>
+            <td>13:00-14:00<br />Aula:S2</td>
+            <td>13:00-14:00<br />Aula:D5</td>
+            <td>13:00-14:00<br />Aula:D5</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="print-button" onclick="window.print()">
+      Imprimir o Guardar como PDF
+    </button>
+  </body>
+</html>

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/public/favicon.webp" type="image/x-icon" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <link rel="stylesheet" href="/src/styles/pages/dashboard.css" />
+    <link rel="stylesheet" href="/src/styles/components/navbar.css" />
+    <title>Dashboard Docente | SGA</title>
+
+    <style>
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(220px, 1fr)
+        ); /* 4 columnas */
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+      .kpi-card {
+        background: #f9f9f9;
+        border: 1px solid #eee;
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+      .kpi-card .kpi-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--pantone, #002347);
+      }
+      .kpi-card .kpi-label {
+        font-size: 1rem;
+        color: #555;
+        margin-top: 5px;
+      }
+      /* Colores específicos para KPIs */
+      .kpi-card.kpi-bajas .kpi-number {
+        color: #dc3545; /* Rojo */
+      }
+      .kpi-card.kpi-riesgo .kpi-number {
+        color: #ffc107; /* Amarillo */
+      }
+      .kpi-card.kpi-aprobacion .kpi-number {
+        color: #28a745; /* Verde */
+      }
+
+      .calif-selector {
+        margin-bottom: 2rem;
+        display: flex;
+        flex-wrap: wrap; /* Para responsividad */
+        align-items: center;
+        gap: 1rem;
+        background-color: #f9f9f9;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+      .calif-selector label {
+        font-weight: bold;
+      }
+      .calif-selector select,
+      .calif-selector input[type="date"] {
+        padding: 0.5rem;
+        font-size: 1rem;
+        flex-grow: 1;
+      }
+
+      .tabla-asistencia {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .tabla-asistencia thead {
+        background-color: #002347;
+        color: white;
+      }
+      .tabla-asistencia th,
+      .tabla-asistencia td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+      .tabla-asistencia td:nth-child(2) {
+        text-align: left; /* Nombre del alumno */
+      }
+
+      .tabla-asistencia .estatus-baja {
+        color: #dc3545; /* Rojo */
+        font-weight: bold;
+        font-style: italic;
+      }
+      .asistencia-radios {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .asistencia-radios label {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+      }
+
+      tr.alumno-baja {
+        background-color: #f9f9f9;
+        opacity: 0.6;
+      }
+
+      .carga-horaria-lista {
+        list-style-type: none;
+        padding-left: 0;
+        margin-top: 1rem;
+        border-top: 1px solid #eee;
+        padding-top: 1rem;
+      }
+      .carga-horaria-lista li {
+        font-size: 1.1rem;
+        padding: 8px 0;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .btn-secondary {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+        margin-top: 0.5rem;
+      }
+      .btn-secondary:hover {
+        background-color: #5a6268;
+      }
+      .curso-actions {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container-nav">
+        <nav class="navbar">
+          <ul class="nav-links">
+            <li>
+              <a href="#" class="nav-link active" data-target="dashboard"
+                >Dashboard</a
+              >
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-target="mis-cursos"
+                >Mis Cursos</a
+              >
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-target="calificaciones"
+                >Gestión de Calificaciones</a
+              >
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-target="asistencia"
+                >Control de Asistencia</a
+              >
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-target="mi-horario"
+                >Mi Horario</a
+              >
+            </li>
+          </ul>
+          <div class="user-menu">
+            <span id="userEmail"></span>
+            <button id="logoutBtn" class="btn-logout">Cerrar Sesión</button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <div id="dashboard" class="page-content active-page">
+          <section class="welcome-section">
+            <h1>Bienvenido, Profesor</h1>
+            <p>
+              Este es su panel de control. Revise los indicadores de sus grupos.
+            </p>
+          </section>
+
+          <section class="content-section">
+            <h2>Indicadores de Desempeño (Semestre Actual)</h2>
+            <div class="kpi-grid">
+              <div class="kpi-card kpi-aprobacion">
+                <div class="kpi-number">85%</div>
+                <div class="kpi-label">Índice de Aprobación</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-number">92%</div>
+                <div class="kpi-label">Asistencia Promedio</div>
+              </div>
+              <div class="kpi-card kpi-riesgo">
+                <div class="kpi-number">4</div>
+                <div class="kpi-label">Alumnos en Riesgo</div>
+              </div>
+              <div class="kpi-card kpi-bajas">
+                <div class="kpi-number">2</div>
+                <div class="kpi-label">Bajas / Cambios</div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div id="mis-cursos" class="page-content">
+          <section class="content-section">
+            <h1>Mis Cursos (AGO-DIC/2025)</h1>
+            <div class="content-grid">
+              <div class="content-block">
+                <h2>[FS1] PROG. FRONT END</h2>
+                <p><strong>Grupo:</strong> A | <strong>Alumnos:</strong> 25</p>
+                <p><strong>Aula:</strong> S4</p>
+                <div class="curso-actions">
+                  <button
+                    class="btn-primary"
+                    data-target="calificaciones"
+                    data-curso="FS1-A">
+                    Gestionar Calificaciones
+                  </button>
+                  <button
+                    class="btn-secondary"
+                    data-target="asistencia"
+                    data-curso="FS1-A">
+                    Tomar Asistencia / Ver Lista
+                  </button>
+                </div>
+              </div>
+              <div class="content-block">
+                <h2>[4P6] ADMÓN. BASE DATOS</h2>
+                <p><strong>Grupo:</strong> A | <strong>Alumnos:</strong> 31</p>
+                <p><strong>Aula:</strong> F5</p>
+                <div class="curso-actions">
+                  <button
+                    class="btn-primary"
+                    data-target="calificaciones"
+                    data-curso="4P6-A">
+                    Gestionar Calificaciones
+                  </button>
+                  <button
+                    class="btn-secondary"
+                    data-target="asistencia"
+                    data-curso="4P6-A">
+                    Tomar Asistencia / Ver Lista
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div id="calificaciones" class="page-content">
+          <section class="content-section">
+            <h1>Gestión de Calificaciones</h1>
+            <div class="calif-selector">
+              <label for="select-curso-calif">Seleccione un curso:</label>
+              <select id="select-curso-calif">
+                <option value="">-- Elija un grupo --</option>
+              </select>
+            </div>
+            <div class="content-block" style="overflow-x: auto">
+              <table class="tabla-gestion-calif">
+                <thead>
+                  <tr>
+                    <th>No. Control</th>
+                    <th>Nombre del Alumno</th>
+                    <th>U1</th>
+                    <th>U2</th>
+                    <th>U3</th>
+                    <th>U4</th>
+                    <th>Prom.</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-alumnos-calif">
+                  <tr class="no-alumnos-row">
+                    <td colspan="7">Seleccione un curso.</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button
+                id="btn-guardar-calif"
+                class="btn-primary"
+                style="margin-top: 1.5rem; float: right">
+                Guardar Cambios
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <div id="asistencia" class="page-content">
+          <section class="content-section">
+            <h1>Control de Asistencia y Listas de Grupo</h1>
+            <div class="calif-selector">
+              <label for="select-curso-asistencia">Curso:</label>
+              <select id="select-curso-asistencia">
+                <option value="">-- Elija un grupo --</option>
+              </select>
+              <label for="fecha-asistencia">Fecha:</label>
+              <input type="date" id="fecha-asistencia" />
+            </div>
+
+            <div class="content-block" style="overflow-x: auto">
+              <table class="tabla-asistencia">
+                <thead>
+                  <tr>
+                    <th>No. Control</th>
+                    <th>Nombre</th>
+                    <th>Estatus</th>
+                    <th>Asistencia</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-alumnos-asistencia">
+                  <tr class="no-alumnos-row">
+                    <td colspan="4">Seleccione un curso.</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button
+                id="btn-guardar-asistencia"
+                class="btn-primary"
+                style="margin-top: 1.5rem; float: right">
+                Guardar Asistencia
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <div id="mi-horario" class="page-content">
+          <section class="content-section">
+            <h1>Mi Horario</h1>
+            <div class="content-block">
+              <div id="horario-container">
+                <table class="tabla-horario">
+                  <thead>
+                    <tr>
+                      <th>Materia</th>
+                      <th>Gpo</th>
+                      <th>Lunes</th>
+                      <th>Martes</th>
+                      <th>Miércoles</th>
+                      <th>Jueves</th>
+                      <th>Viernes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="clave-materia">FS1</div>
+                        <div class="nombre-materia">PROG. FRONT END</div>
+                      </td>
+                      <td>A</td>
+                      <td>14:00-15:00<br />Aula:S4</td>
+                      <td>14:00-15:00<br />Aula:S4</td>
+                      <td>14:00-15:00<br />Aula:S4</td>
+                      <td>14:00-15:00<br />Aula:S4</td>
+                      <td>14:00-15:00<br />Aula:S4</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="clave-materia">4P6</div>
+                        <div class="nombre-materia">ADMÓN. BASE DATOS</div>
+                      </td>
+                      <td>A</td>
+                      <td>10:00-11:00<br />Aula:F5</td>
+                      <td>10:00-11:00<br />Aula:F5</td>
+                      <td>10:00-11:00<br />Aula:F5</td>
+                      <td>10:00-11:00<br />Aula:F5</td>
+                      <td>10:00-11:00<br />Aula:F5</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="content-block" style="margin-top: 2rem">
+                <h2>Resumen de Carga Horaria</h2>
+                <ul class="carga-horaria-lista">
+                  <li>
+                    <strong>Total de Horas-Semana:</strong>
+                    <span>20</span>
+                  </li>
+                  <li>
+                    <strong>Horas Frente a Grupo:</strong>
+                    <span>10</span>
+                  </li>
+                  <li>
+                    <strong>Horas de Asesoría/Tutoría:</strong>
+                    <span>5</span>
+                  </li>
+                  <li>
+                    <strong>Horas de Investigación/Gestión:</strong>
+                    <span>5</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="copyright">
+          &copy; 2025 Sistema de Gestión Académica. Todos los derechos
+          reservados.
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
+
+      const SUPABASE_URL = "https://uznqokybucscboikanfc.supabase.co"
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6bnFva3lidWNzY2JvaWthbmZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIwNDIzNzAsImV4cCI6MjA3NzYxODM3MH0.L1di6LqteqMG8LCR-Utaqq1k9c5v-pNiBDbEt9SE5uc"
+
+      const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+      console.log("Dashboard MAESTRO cargando...")
+
+      // Verificar auth UNA VEZ
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
+
+      if (!session) {
+        console.log("Sin sesión")
+        window.location.replace("/index.html")
+        throw new Error("No auth")
+      }
+
+      console.log("Sesión:", session.user.email)
+
+      // Verificar rol
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("rol")
+        .eq("id", session.user.id)
+        .single()
+
+      if (profileError) {
+        console.error("Error perfil:", profileError.message)
+        window.location.replace("/src/pages/dashboard.html")
+        throw new Error("Profile error")
+      }
+
+      if (!profile || profile.rol !== "maestro") {
+        console.log("No es maestro (rol:", profile?.rol, ")")
+        window.location.replace("/src/pages/dashboard.html")
+        throw new Error("Not teacher")
+      }
+
+      console.log("MAESTRO verificado")
+
+      // Actualizar UI
+      document.getElementById("userEmail").textContent = session.user.email
+
+      // Logout
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", async (e) => {
+          e.preventDefault()
+          console.log("Cerrando sesión")
+          await supabase.auth.signOut()
+          window.location.replace("/index.html")
+        })
+
+      console.log("✅ Dashboard MAESTRO listo")
+
+      // === SPA ===
+      const navLinks = document.querySelectorAll(".nav-link")
+      const pages = document.querySelectorAll(".page-content")
+      const pageButtons = document.querySelectorAll("button[data-target]")
+
+      function showPage(id) {
+        pages.forEach((p) => p.classList.remove("active-page"))
+        navLinks.forEach((l) => l.classList.remove("active"))
+        const page = document.getElementById(id)
+        if (page) page.classList.add("active-page")
+        const link = document.querySelector(`.nav-link[data-target="${id}"]`)
+        if (link) link.classList.add("active")
+      }
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault()
+          showPage(link.getAttribute("data-target"))
+        })
+      })
+
+      // === Lógica de cursos ===
+      const datosCursos = {
+        "FS1-A": [
+          { ctrl: "21550100", nombre: "GOMEZ PEREZ, JUAN", estatus: "Activo" },
+          {
+            ctrl: "21550101",
+            nombre: "MARTINEZ LOPEZ, MARIA",
+            estatus: "Activo",
+          },
+          { ctrl: "21550102", nombre: "DIAZ HERNANDEZ, LUIS", estatus: "Baja" },
+        ],
+        "4P6-A": [
+          {
+            ctrl: "21550200",
+            nombre: "SANCHEZ GARCIA, ANA",
+            estatus: "Activo",
+          },
+          {
+            ctrl: "21550201",
+            nombre: "ROMERO RUIZ, CARLOS",
+            estatus: "Activo",
+          },
+          {
+            ctrl: "21550346",
+            nombre: "ESPINO CABRALES, ANDY",
+            estatus: "Activo",
+          },
+          {
+            ctrl: "21550203",
+            nombre: "TORRES ORTIZ, SOFIA",
+            estatus: "Cambio",
+          },
+        ],
+      }
+
+      const selectCursoCalif = document.getElementById("select-curso-calif")
+      const tbodyAlumnosCalif = document.getElementById("tbody-alumnos-calif")
+      const btnGuardarCalif = document.getElementById("btn-guardar-calif")
+
+      const selectCursoAsistencia = document.getElementById(
+        "select-curso-asistencia"
+      )
+      const tbodyAlumnosAsistencia = document.getElementById(
+        "tbody-alumnos-asistencia"
+      )
+      const btnGuardarAsistencia = document.getElementById(
+        "btn-guardar-asistencia"
+      )
+      const fechaAsistenciaInput = document.getElementById("fecha-asistencia")
+
+      function llenarSelectores() {
+        selectCursoCalif.innerHTML =
+          '<option value="">-- Elija un grupo --</option>'
+        selectCursoAsistencia.innerHTML =
+          '<option value="">-- Elija un grupo --</option>'
+
+        for (const cursoId in datosCursos) {
+          selectCursoCalif.options.add(new Option(cursoId, cursoId))
+          selectCursoAsistencia.options.add(new Option(cursoId, cursoId))
+        }
+      }
+
+      pageButtons.forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault()
+          const targetId = btn.getAttribute("data-target")
+          const cursoId = btn.getAttribute("data-curso")
+          showPage(targetId)
+
+          if (targetId === "calificaciones") {
+            selectCursoCalif.value = cursoId
+            selectCursoCalif.dispatchEvent(new Event("change"))
+          }
+          if (targetId === "asistencia") {
+            selectCursoAsistencia.value = cursoId
+            selectCursoAsistencia.dispatchEvent(new Event("change"))
+          }
+        })
+      })
+
+      function renderizarAlumnosCalif(cursoId) {
+        tbodyAlumnosCalif.innerHTML = ""
+        if (!cursoId || !datosCursos[cursoId]) {
+          tbodyAlumnosCalif.innerHTML = `<tr class="no-alumnos-row"><td colspan="7">Seleccione un curso.</td></tr>`
+          return
+        }
+        datosCursos[cursoId].forEach((alumno) => {
+          const tr = document.createElement("tr")
+          if (alumno.estatus !== "Activo") {
+            tr.style.display = "none"
+          }
+          tr.setAttribute("data-ctrl", alumno.ctrl)
+          tr.innerHTML = `
+      <td>${alumno.ctrl}</td>
+      <td>${alumno.nombre}</td>
+      <td><input type="number" class="calif-input" name="u1" min="0" max="100"></td>
+      <td><input type="number" class="calif-input" name="u2" min="0" max="100"></td>
+      <td><input type="number" class="calif-input" name="u3" min="0" max="100"></td>
+      <td><input type="number" class="calif-input" name="u4" min="0" max="100"></td>
+      <td><strong>-</strong></td>
+    `
+          tbodyAlumnosCalif.appendChild(tr)
+        })
+      }
+
+      selectCursoCalif.addEventListener("change", (e) =>
+        renderizarAlumnosCalif(e.target.value)
+      )
+      btnGuardarCalif.addEventListener("click", () =>
+        alert(`Calificaciones guardadas`)
+      )
+
+      function renderizarAlumnosAsistencia(cursoId) {
+        tbodyAlumnosAsistencia.innerHTML = ""
+        if (!cursoId || !datosCursos[cursoId]) {
+          tbodyAlumnosAsistencia.innerHTML = `<tr class="no-alumnos-row"><td colspan="4">Seleccione un curso.</td></tr>`
+          return
+        }
+
+        datosCursos[cursoId].forEach((alumno) => {
+          const tr = document.createElement("tr")
+          const estatusClass =
+            alumno.estatus !== "Activo"
+              ? `estatus-${alumno.estatus.toLowerCase()}`
+              : ""
+          const estaDeBaja = alumno.estatus !== "Activo"
+
+          if (estaDeBaja) tr.classList.add("alumno-baja")
+
+          tr.innerHTML = `
+      <td>${alumno.ctrl}</td>
+      <td>${alumno.nombre}</td>
+      <td class="${estatusClass}">${alumno.estatus}</td>
+      <td class="asistencia-radios">
+        <label><input type="radio" name="asistencia-${alumno.ctrl}" value="P" ${
+            estaDeBaja ? "disabled" : "checked"
+          }> P</label>
+        <label><input type="radio" name="asistencia-${alumno.ctrl}" value="A" ${
+            estaDeBaja ? "disabled" : ""
+          }> A</label>
+        <label><input type="radio" name="asistencia-${alumno.ctrl}" value="R" ${
+            estaDeBaja ? "disabled" : ""
+          }> R</label>
+      </td>
+    `
+          tbodyAlumnosAsistencia.appendChild(tr)
+        })
+      }
+
+      selectCursoAsistencia.addEventListener("change", (e) =>
+        renderizarAlumnosAsistencia(e.target.value)
+      )
+      fechaAsistenciaInput.valueAsDate = new Date()
+      btnGuardarAsistencia.addEventListener("click", () => {
+        const fecha = fechaAsistenciaInput.value
+        if (!fecha) {
+          alert("Seleccione una fecha.")
+          return
+        }
+        alert(`Asistencia del ${fecha} guardada`)
+      })
+
+      llenarSelectores()
+      console.log("✅ Lógica de cursos lista")
+    </script>
+  </body>
+</html>
