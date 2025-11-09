@@ -1,0 +1,13 @@
+Funcionales:
+1. El sistema debe permitir el registro e inicio de sesión de alumnos y docentes.
+2. El docente puede crear nuevos proyectos con fecha de inicio y fin.
+3. El docente puede asignar alumnos a equipos de trabajo dentro de un proyecto.
+4. Los alumnos pueden visualizar sus tareas y fechas límites.
+5. Los alumnos pueden subir entregas y registrar avances.
+6. El docente puede revisar entregas y dejar comentarios.
+
+No Funcionales:
+1. Debe estar disponible el 95% del tiempo.
+2. Las contraseñas deben almacenarse de forma segura.
+3. La interfaz debe ser responsive.
+4. Los tiempos de respuesta no deben superar los 2 segundos.

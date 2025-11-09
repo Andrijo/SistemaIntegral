@@ -31,7 +31,7 @@
       const status = document.getElementById("status")
 
       if (typeof window.supabase !== "undefined") {
-        status.innerHTML += "<p>✅ Supabase cargado</p>"
+        status.innerHTML += "<p>Supabase cargado</p>"
 
         const client = window.supabase.createClient(
           "https://uznqokybucscboikanfc.supabase.co",
@@ -39,10 +39,10 @@
         )
 
         if (client) {
-          status.innerHTML += "<p>✅ Cliente creado exitosamente</p>"
+          status.innerHTML += "<p>Cliente creado exitosamente</p>"
         }
       } else {
-        status.innerHTML += "<p>❌ Supabase NO cargado</p>"
+        status.innerHTML += "<p>Supabase NO cargado</p>"
       }
     
       // Storage local usage

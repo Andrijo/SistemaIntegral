@@ -1,0 +1,130 @@
+@import url("/src/styles/components/colors.css");
+/* Contenedor principal del horario */
+#horario-container {
+  max-width: 1000px;
+  margin: 1rem auto; /* Ajusta el margen si es necesario */
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden; /* Para que el border-radius afecte a la tabla */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de la tabla */
+.tabla-horario {
+  width: 100%;
+  border-collapse: collapse; /* Bordes de tabla unidos */
+}
+
+/* Estilos de las celdas (encabezado y datos) */
+.tabla-horario th,
+.tabla-horario td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Encabezado de la tabla (azul oscuro) */
+.tabla-horario thead th {
+  background-color: var(--pantone);
+  color: white;
+  padding: 12px 8px;
+  font-size: 0.8rem;
+  text-transform: uppercase; /* Mayúsculas */
+  letter-spacing: 0.5px;
+}
+
+/* Columna de Materia, alineada a la izquierda */
+.tabla-horario td:first-child,
+.tabla-horario th:first-child {
+  text-align: left;
+  padding-left: 15px;
+  font-size: 0.85rem;
+}
+
+/* Texto más pequeño para las claves de materia */
+.tabla-horario td .clave-materia {
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.tabla-horario td .nombre-materia {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* Estilos para el botón de imprimir */
+.print-button {
+  display: block; /* Que ocupe su propia línea */
+  margin: 25px auto; /* Centrado y con espacio */
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--pantone);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.print-button:hover {
+  background-color: var(--cool-gray-pantone);
+}
+
+/* --- Estilos de Impresión --- */
+@media print {
+  /* Ocultar elementos que no queremos imprimir */
+  .print-button,
+  header, /* Oculta el navbar */
+  footer /* Oculta el footer */ {
+    display: none !important; /* !important para asegurar que se oculten */
+  }
+
+  /* Quitar fondo y márgenes del body */
+  body {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Expandir la página de horario para que sea el único contenido */
+  main,
+  .container,
+  #horario,
+  #horario .content-section {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Ocultar todas las demás páginas */
+  .page-content {
+    display: none !important; /* Oculta todas por defecto */
+  }
+
+  #horario {
+    display: block !important; /* Muestra solo la de horario */
+  }
+
+  /* Asegurar que el contenedor del horario ocupe el ancho */
+  #horario-container {
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Forzar que la tabla use colores de fondo (si el navegador lo permite) */
+  .tabla-horario thead th {
+    background-color: #002347 !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact; /* Para Chrome/Safari */
+    color-adjust: exact; /* Estándar */
+  }
+}
