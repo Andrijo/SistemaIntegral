@@ -7,6 +7,26 @@
     <h1>Test de Supabase</h1>
     <div id="status"></div>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Storage local helper (localStorage) -->
+    <script src="../scripts/storage-local.js"></script>
+
+    <section style="margin-top:1rem; border-top:1px solid #ddd; padding-top:1rem;">
+      <h2>Prueba de almacenamiento local (localStorage)</h2>
+      <form id="userForm">
+        <input type="text" id="name" placeholder="Nombre" required />
+        <input type="email" id="email" placeholder="Correo" required />
+        <select id="role">
+          <option value="student">Alumno</option>
+          <option value="teacher">Profesor</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button type="submit">Agregar usuario</button>
+      </form>
+
+      <button id="btnList">Listar usuarios</button>
+      <button id="btnClear">Limpiar usuarios</button>
+      <ul id="usersList"></ul>
+    </section>
     <script>
       const status = document.getElementById("status")
 
@@ -24,6 +44,275 @@
       } else {
         status.innerHTML += "<p>Supabase NO cargado</p>"
       }
+    
+      // Storage local usage
+      const usersList = document.getElementById('usersList');
+      const form = document.getElementById('userForm');
+      const btnList = document.getElementById('btnList');
+      const btnClear = document.getElementById('btnClear');
+
+      function renderUsers() {
+        const users = StorageLocal.getAllArray('users');
+        usersList.innerHTML = '';
+        if (!users.length) {
+          usersList.innerHTML = '<li>(sin usuarios aún)</li>';
+          return;
+        }
+        users.forEach(u => {
+          const li = document.createElement('li');
+          li.textContent = `${u.id} — ${u.name} <${u.email}> (${u.role})`;
+          usersList.appendChild(li);
+        });
+      }
+
+      form.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const role = document.getElementById('role').value;
+        if (!name || !email) return;
+        const user = { name, email, role, createdAt: new Date().toISOString() };
+        const saved = StorageLocal.upsert('users', user);
+        renderUsers();
+        form.reset();
+        console.log('Saved', saved);
+      });
+
+      btnList.addEventListener('click', () => renderUsers());
+      btnClear.addEventListener('click', () => {
+        if (confirm('Eliminar todos los usuarios de localStorage?')) {
+          StorageLocal.clearStore('users');
+          renderUsers();
+        }
+      });
+
+      // initial render
+      renderUsers();
+
+      /* -------------------------
+         Sección: Profesores y selección de materias
+         - Crea/seed datos de ejemplo de profesores y clases
+         - Permite seleccionar una clase y guarda selección en localStorage
+         - Evita empalmes (mismo día y horas que se solapan)
+      ------------------------- */
+
+      // utilidades de tiempo
+      function timeToMinutes(t) {
+        // t: "HH:MM"
+        const [hh, mm] = t.split(':').map(Number);
+        return hh * 60 + mm;
+      }
+
+      function rangesOverlap(aStart, aEnd, bStart, bEnd) {
+        return Math.max(aStart, bStart) < Math.min(aEnd, bEnd);
+      }
+
+      // sample teachers data
+      function seedTeachers() {
+        // Always upsert teachers so new/updated data propagates on reload
+        const teachers = [
+          {
+            id: 't_ana',
+            name: 'Ana García',
+            email: 'ana.garcia@example.com',
+            phone: '+52 1 55 1234 5678',
+            classes: [
+              { id: 'c_ana_1', subject: 'Matemáticas I', day: 'Lunes', start: '09:00', end: '10:30' },
+              { id: 'c_ana_2', subject: 'Álgebra', day: 'Miércoles', start: '11:00', end: '12:30' }
+            ]
+          },
+          {
+            id: 't_juan',
+            name: 'Juan Pérez',
+            email: 'juan.perez@example.com',
+            phone: '+52 1 55 9876 5432',
+            classes: [
+              { id: 'c_juan_1', subject: 'Matemáticas I', day: 'Lunes', start: '10:00', end: '11:30' },
+              { id: 'c_juan_2', subject: 'Física', day: 'Martes', start: '09:00', end: '10:30' }
+            ]
+          },
+          {
+            id: 't_maria',
+            name: 'María López',
+            email: 'maria.lopez@example.com',
+            phone: '+52 1 55 2222 3333',
+            classes: [
+              { id: 'c_maria_1', subject: 'Programación', day: 'Martes', start: '09:00', end: '10:30' },
+              { id: 'c_maria_2', subject: 'Estructuras', day: 'Jueves', start: '13:00', end: '14:30' }
+            ]
+          },
+          {
+            id: 't_carlos',
+            name: 'Carlos Ruiz',
+            email: 'carlos.ruiz@example.com',
+            phone: '+52 1 55 4444 5555',
+            classes: [
+              { id: 'c_carlos_1', subject: 'Redes', day: 'Miércoles', start: '09:00', end: '10:30' },
+              { id: 'c_carlos_2', subject: 'Seguridad', day: 'Viernes', start: '15:00', end: '16:30' }
+            ]
+          },
+          {
+            id: 't_sofia',
+            name: 'Sofía Martínez',
+            email: 'sofia.martinez@example.com',
+            phone: '+52 1 55 6666 7777',
+            classes: [
+              { id: 'c_sofia_1', subject: 'Bases de Datos', day: 'Jueves', start: '09:00', end: '10:30' },
+              { id: 'c_sofia_2', subject: 'Ingeniería', day: 'Lunes', start: '14:00', end: '15:30' }
+            ]
+          },
+          {
+            id: 't_pedro',
+            name: 'Pedro Gómez',
+            email: 'pedro.gomez@example.com',
+            phone: '+52 1 55 8888 9999',
+            classes: [
+              { id: 'c_pedro_1', subject: 'Física', day: 'Viernes', start: '09:00', end: '10:30' },
+              { id: 'c_pedro_2', subject: 'Matemáticas II', day: 'Miércoles', start: '16:00', end: '17:30' }
+            ]
+          }
+          ,
+          {
+            id: 't_luis',
+            name: 'Luis Fernández',
+            email: 'luis.fernandez@example.com',
+            phone: '+52 1 55 1010 2020',
+            classes: [
+              { id: 'c_luis_1', subject: 'Química', day: 'Martes', start: '11:00', end: '12:30' },
+              { id: 'c_luis_2', subject: 'Matemáticas I', day: 'Jueves', start: '09:00', end: '10:30' }
+            ]
+          },
+          {
+            id: 't_laura',
+            name: 'Laura Castillo',
+            email: 'laura.castillo@example.com',
+            phone: '+52 1 55 3030 4040',
+            classes: [
+              { id: 'c_laura_1', subject: 'Filosofía', day: 'Miércoles', start: '13:00', end: '14:30' },
+              { id: 'c_laura_2', subject: 'Programación', day: 'Lunes', start: '09:00', end: '10:30' }
+            ]
+          }
+        ];
+
+        teachers.forEach(t => StorageLocal.upsert('teachers', t));
+      }
+
+      function renderTeachers() {
+        seedTeachers();
+        const teachers = StorageLocal.getAllArray('teachers');
+        const container = document.getElementById('teachersContainer');
+        container.innerHTML = '';
+        teachers.forEach(t => {
+          const card = document.createElement('div');
+          card.style.border = '1px solid #ddd';
+          card.style.padding = '0.5rem';
+          card.style.marginBottom = '0.5rem';
+          const h = document.createElement('h3');
+          h.textContent = `${t.name} — ${t.phone}`;
+          const p = document.createElement('p');
+          p.innerHTML = `<small>${t.email}</small>`;
+          card.appendChild(h);
+          card.appendChild(p);
+
+          const ul = document.createElement('ul');
+          t.classes.forEach(cl => {
+            const li = document.createElement('li');
+            li.style.margin = '0.25rem 0';
+            li.innerHTML = `<strong>${cl.subject}</strong> — ${cl.day} ${cl.start}-${cl.end}`;
+            const btn = document.createElement('button');
+            btn.textContent = 'Seleccionar';
+            btn.style.marginLeft = '1rem';
+            btn.addEventListener('click', () => selectClass(t, cl));
+            li.appendChild(btn);
+            ul.appendChild(li);
+          });
+
+          card.appendChild(ul);
+          container.appendChild(card);
+        });
+      }
+
+      function selectClass(teacher, cl) {
+        // Build selection object
+        const newSel = {
+          id: StorageLocal.generateId('sel'),
+          classId: cl.id,
+          teacherId: teacher.id,
+          teacherName: teacher.name,
+          subject: cl.subject,
+          day: cl.day,
+          start: cl.start,
+          end: cl.end,
+          selectedAt: new Date().toISOString()
+        };
+
+        // check conflicts: block overlapping time ranges regardless of day
+        const selections = StorageLocal.getAllArray('selections');
+        for (const s of selections) {
+          const aStart = timeToMinutes(s.start);
+          const aEnd = timeToMinutes(s.end);
+          const bStart = timeToMinutes(newSel.start);
+          const bEnd = timeToMinutes(newSel.end);
+          if (rangesOverlap(aStart, aEnd, bStart, bEnd)) {
+            alert(`No puedes seleccionar "${newSel.subject}" (${newSel.start}-${newSel.end}) porque empalma con "${s.subject}" (${s.start}-${s.end}).`);
+            return;
+          }
+        }
+
+        // save selection
+        StorageLocal.upsert('selections', newSel);
+        renderSelections();
+        alert(`Seleccionaste: ${newSel.subject} con ${newSel.teacherName} (${newSel.day} ${newSel.start}-${newSel.end})`);
+      }
+
+      function renderSelections() {
+        const selList = document.getElementById('selectionsList');
+        const selections = StorageLocal.getAllArray('selections');
+        selList.innerHTML = '';
+        if (!selections.length) {
+          selList.innerHTML = '<li>(sin selecciones)</li>';
+          return;
+        }
+        selections.forEach(s => {
+          const li = document.createElement('li');
+          li.textContent = `${s.subject} — ${s.teacherName} (${s.day} ${s.start}-${s.end})`;
+          const btn = document.createElement('button');
+          btn.textContent = 'Eliminar';
+          btn.style.marginLeft = '1rem';
+          btn.addEventListener('click', () => {
+            StorageLocal.delete('selections', s.id);
+            renderSelections();
+          });
+          li.appendChild(btn);
+          selList.appendChild(li);
+        });
+      }
+
+      // render teachers section in DOM (create container)
+      (function setupTeachersSection() {
+        const section = document.createElement('section');
+        section.style.marginTop = '1rem';
+        section.style.borderTop = '1px solid #ccc';
+        section.style.paddingTop = '1rem';
+        section.innerHTML = `
+          <h2>Profesores y selección de materias</h2>
+          <div id="teachersContainer"></div>
+          <h3>Mis selecciones</h3>
+          <button id="btnClearSelections">Borrar todas las selecciones</button>
+          <ul id="selectionsList"></ul>
+        `;
+        document.body.appendChild(section);
+
+        document.getElementById('btnClearSelections').addEventListener('click', () => {
+          if (confirm('Eliminar todas las selecciones?')) {
+            StorageLocal.clearStore('selections');
+            renderSelections();
+          }
+        });
+
+        renderTeachers();
+        renderSelections();
+      })();
     </script>
   </body>
 </html>
